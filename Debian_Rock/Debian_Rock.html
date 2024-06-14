@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Debian Rock C4 - MSA Summer School: IoT Predictive Maintenance</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html" class="active"><strong aria-hidden="true">2.</strong> Debian Rock C4</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MSA Summer School: IoT Predictive Maintenance</h1>
+
+                    <div class="right-buttons">
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="getting-familiar-with-the-rock-c4-and-debian-os"><a class="header" href="#getting-familiar-with-the-rock-c4-and-debian-os">Getting familiar with the Rock C4+ and Debian OS</a></h1>
+<p>This page will give useful information for navigating the Debian OS on the Rock C4+.</p>
+<h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
+<ol>
+<li>
+<p>Once Keyboard and mouse are connected and the HDMI cable is plugged into port closet to the audio jack, you can plug in the USB-C power cable.</p>
+</li>
+<li>
+<p>To login, use the <code>Rock</code> account and provide the following password <code>toor</code></p>
+</li>
+<li>
+<p>Once logged in you will be greeted with the following view.</p>
+</li>
+<li>
+<p>Now, you need to open a terminal press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal.</p>
+</li>
+</ol>
+<!--
+1. `sudo apt update`
+    - This should update the system however you may get a response that says:
+    ```sh
+    > W: An error occured during the signature verifcation. The repository is not updated and the previous index files will be used. GPG error: http://apt.radxa/com/bullseye-stable bullseye InRelease: The following signatures could not be verified because the public key is not available: NO_PUBKEY 9B98116C9AA302C7
+    > W: Filed to fetch http://apt.radxa/com/bullseye-stable/dists/bullseye/InRelease The following signatures could not be verified because the public key is not available: NO_PUBKEY 9B98116C9AA302C7
+    > W: Some index files failed to download. They have been ignored, or old ones used instead.
+    ```
+    -  If that is the case you will need to run the following command:
+    ```sh
+    $ wget -O - apt.radxa.com/focal-stable/public.key | sudo apt-key add
+    ```
+
+    - You should get some feedback with a HTTP request and a Warning about apt-key is deprecated... this is fine (if only there was a deterministic, declarative system out there we could have used...)
+
+    - Run the `sudo apt update` again and once finished run `sudo apt upgrade` this my take 10 mins.
+
+    Source: [https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable](https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable)
+-->
+<h2 id="networking"><a class="header" href="#networking">Networking</a></h2>
+<p>The Debain OS for the Rock C4+ uses the <code>NetworkManager</code> package to manage all connections to the network interface chips.</p>
+<p><code>NetworkManager</code> directory is located here -&gt; <code>/etc/NetworkManager</code>, the contents of which is:</p>
+<pre><code class="language-sh">NetworkManager.conf
+conf.d/
+dispatcher.d/
+dnsmasq-shared.d/
+dnsmasq.d/
+system-connections/
+</code></pre>
+<p>All of your Wi-Fi profiles are stored in the <code>system-connections</code> folder, for example:</p>
+<pre><code class="language-sh">$ ls /etc/NetworkManager/system-connections
+&gt; OKdo05.nmconnection
+&gt; eduroam.nmconnection
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<blockquote>
+<p>The file naming convention, <code>&lt;ssid&gt;.nmconnection</code>, this is strict and case-sensitive.</p>
+</blockquote>
+</blockquote>
+<p>Each <code>...nmconnection</code> file has a format and for eduroam, which is an enterprise network it looks like this, you will need to have root level permissions:</p>
+<pre><code class="language-sh">$ sudo cat /etc/NetworkManager/system-connections/eduroam.nmconnection
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code class="language-sh">[connection]
+id=eduroam
+uuid=4e3235f7-8387-4102-8a57-dd1120f29ac5
+type=wifi
+interface-name=wlan0
+permissions=user:dev:;
+
+[wifi]
+mac-address-blacklist=
+mode=infrastructure
+ssid=eduroam
+
+[wifi-security]
+auth-alg=open
+key-mmgt=wpa-eap
+
+[802-1x]
+anonymous-identity=username@gre.ac.uk
+eap=ttls;
+identity=username@greenwich.ac.uk
+password=YOURPASSWORD
+phase2-auth=mschapv2
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+
+[proxy]
+</code></pre>
+<blockquote>
+<p><strong>Note</strong></p>
+<blockquote>
+<p>You may need to reload the connection:</p>
+<ul>
+<li><code>nmcli connection reload</code> or you can do this with elevation</li>
+<li><code>sudo ncmli connetion reload</code></li>
+</ul>
+</blockquote>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Introduction/Introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Introduction/Introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
