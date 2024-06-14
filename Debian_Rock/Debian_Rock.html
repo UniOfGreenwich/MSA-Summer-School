@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html" class="active"><strong aria-hidden="true">2.</strong> Debian Rock C4</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">2.</strong> Documentation</a></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">3.</strong> Soldering Instructions</a></li><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.1.</strong> ESP8266</a></li><li class="chapter-item "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">4.2.</strong> Testing Sensors</a></li><li class="chapter-item "><a href="../ESP8266/Build_WebPage.html"><strong aria-hidden="true">4.3.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">4.4.</strong> IoT Setup</a></li></ol></li><li class="chapter-item expanded "><a href="../Debian_Rock/Debian_Rock.html" class="active"><strong aria-hidden="true">5.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">5.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">5.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">5.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">5.4.</strong> Python Script</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,19 +173,48 @@
                     <main>
                         <h1 id="getting-familiar-with-the-rock-c4-and-debian-os"><a class="header" href="#getting-familiar-with-the-rock-c4-and-debian-os">Getting familiar with the Rock C4+ and Debian OS</a></h1>
 <p>This page will give useful information for navigating the Debian OS on the Rock C4+.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<blockquote>
+<p>When ever you see the following syntax:</p>
+<ul>
+<li><code>$ command </code> or <code>&gt; output</code>
+<ul>
+<li><code>$</code> indicates a command to run from the commandline, you don't type the <code>$</code></li>
+<li><code>&gt;</code> indicates an output produce on the commandline</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</blockquote>
 <h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
 <ol>
 <li>
 <p>Once Keyboard and mouse are connected and the HDMI cable is plugged into port closet to the audio jack, you can plug in the USB-C power cable.</p>
 </li>
 <li>
-<p>To login, use the <code>Rock</code> account and provide the following password <code>toor</code></p>
+<p>To login, use the <code>rock</code> account and provide the following password <code>toor</code></p>
 </li>
 <li>
 <p>Once logged in you will be greeted with the following view.</p>
 </li>
 <li>
-<p>Now, you need to open a terminal press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal.</p>
+<p>Now, you need to open a terminal, press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal.</p>
+</li>
+<li>
+<p>You can launch this workbook from the terminal now, or by double clicking the icon on the desktop.</p>
+<ul>
+<li><code>$ workbook &amp;</code></li>
+</ul>
+<blockquote>
+<p>*<em>Note</em></p>
+<blockquote>
+<ul>
+<li><code>workbook</code> is the a command that will launch the web browser with the workbook url, this is local page.</li>
+<li><code>&amp;</code> <em>ampersand</em>, tells the shell to run the preceeding process in the background.</li>
+</ul>
+</blockquote>
+</blockquote>
 </li>
 </ol>
 <!--
@@ -207,84 +236,17 @@
 
     Source: [https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable](https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable)
 -->
-<h2 id="networking"><a class="header" href="#networking">Networking</a></h2>
-<p>The Debain OS for the Rock C4+ uses the <code>NetworkManager</code> package to manage all connections to the network interface chips.</p>
-<p><code>NetworkManager</code> directory is located here -&gt; <code>/etc/NetworkManager</code>, the contents of which is:</p>
-<pre><code class="language-sh">NetworkManager.conf
-conf.d/
-dispatcher.d/
-dnsmasq-shared.d/
-dnsmasq.d/
-system-connections/
-</code></pre>
-<p>All of your Wi-Fi profiles are stored in the <code>system-connections</code> folder, for example:</p>
-<pre><code class="language-sh">$ ls /etc/NetworkManager/system-connections
-&gt; OKdo05.nmconnection
-&gt; eduroam.nmconnection
-</code></pre>
-<blockquote>
-<p><strong>Note:</strong></p>
-<blockquote>
-<p>The file naming convention, <code>&lt;ssid&gt;.nmconnection</code>, this is strict and case-sensitive.</p>
-</blockquote>
-</blockquote>
-<p>Each <code>...nmconnection</code> file has a format and for eduroam, which is an enterprise network it looks like this, you will need to have root level permissions:</p>
-<pre><code class="language-sh">$ sudo cat /etc/NetworkManager/system-connections/eduroam.nmconnection
-</code></pre>
-<p><strong>Output:</strong></p>
-<pre><code class="language-sh">[connection]
-id=eduroam
-uuid=4e3235f7-8387-4102-8a57-dd1120f29ac5
-type=wifi
-interface-name=wlan0
-permissions=user:dev:;
-
-[wifi]
-mac-address-blacklist=
-mode=infrastructure
-ssid=eduroam
-
-[wifi-security]
-auth-alg=open
-key-mmgt=wpa-eap
-
-[802-1x]
-anonymous-identity=username@gre.ac.uk
-eap=ttls;
-identity=username@greenwich.ac.uk
-password=YOURPASSWORD
-phase2-auth=mschapv2
-
-[ipv4]
-dns-search=
-method=auto
-
-[ipv6]
-addr-gen-mode=stable-privacy
-dns-search=
-method=auto
-
-[proxy]
-</code></pre>
-<blockquote>
-<p><strong>Note</strong></p>
-<blockquote>
-<p>You may need to reload the connection:</p>
-<ul>
-<li><code>nmcli connection reload</code> or you can do this with elevation</li>
-<li><code>sudo ncmli connetion reload</code></li>
-</ul>
-</blockquote>
-</blockquote>
-
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../Introduction/Introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ESP8266/IoT_Setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../Debian_Rock/Internet.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -292,10 +254,13 @@ method=auto
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../Introduction/Introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ESP8266/IoT_Setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../Debian_Rock/Internet.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
