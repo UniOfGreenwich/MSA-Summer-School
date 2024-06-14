@@ -8,7 +8,7 @@
 *    - Added Doxygen comments for industrial compliance (CompEng0001)
 *    - Converted const integers to variables (CompEng0001)
 *    - Refactored Code (CompEng0001)
-*    - Created {x,y,z}_axis variables to stored mma events instead of calling more than once (CompEng0001)
+*    - Created {x,y,z}_axis variables to store mma events instead of calling more than once (CompEng0001)
 *    - Created new handle for SBC POST request 'handleSBC()' & `server.on("/sbc",handleSBC)` visit ./predictiveMaintenance/predictiveMaintenance.py (CompEng0001)
 */
 
@@ -109,7 +109,7 @@ void handleRoot() {
   Serial.println(rms_vib);
   delay(200);
 
-  //Convert Temperature int to String then Replace @@temp@@ in HTML with temperaure value
+  //Convert variables to String then Replace @@temp@@ in HTML with temperaure value
   s.replace("@@m_temp@@", String(m_Temp));
   s.replace("@@a_temp@@", String(a_Temp));
   s.replace("@@humidity@@", String(h));

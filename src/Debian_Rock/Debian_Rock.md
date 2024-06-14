@@ -2,16 +2,30 @@
 
 This page will give useful information for navigating the Debian OS on the Rock C4+.
 
+> **Note** 
+>> When ever you see the following syntax:
+>>
+>> - `$ command ` or `> output`
+>>      - `$` indicates a command to run from the commandline, you don't type the `$`
+>>      - `>` indicates an output produce on the commandline
+
 ## Getting Started
 
 1. Once Keyboard and mouse are connected and the HDMI cable is plugged into port closet to the audio jack, you can plug in the USB-C power cable. 
 
-2. To login, use the `Rock` account and provide the following password `toor`
+2. To login, use the `rock` account and provide the following password `toor`
 
 3. Once logged in you will be greeted with the following view. 
 
-4. Now, you need to open a terminal press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal. 
+4. Now, you need to open a terminal, press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal. 
 
+5. You can launch this workbook from the terminal now, or by double clicking the icon on the desktop. 
+
+    -  `$ workbook &`
+
+    > **Note*
+    >> - `workbook` is the a command that will launch the web browser with the workbook url, this is local page. 
+    >> - `&` *ampersand*, tells the shell to run the preceeding process in the background.
 
 <!--
 1. `sudo apt update`
@@ -32,76 +46,3 @@ This page will give useful information for navigating the Debian OS on the Rock 
 
     Source: [https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable](https://wiki.radxa.com/Rock5/linux/radxa-apt#focal-stable)
 -->
-
-## Networking
-
-The Debain OS for the Rock C4+ uses the `NetworkManager` package to manage all connections to the network interface chips. 
-
-`NetworkManager` directory is located here -> `/etc/NetworkManager`, the contents of which is:
-
-```sh
-NetworkManager.conf
-conf.d/
-dispatcher.d/
-dnsmasq-shared.d/
-dnsmasq.d/
-system-connections/
-```
-
-All of your Wi-Fi profiles are stored in the `system-connections` folder, for example:
-
-```sh
-$ ls /etc/NetworkManager/system-connections
-> OKdo05.nmconnection
-> eduroam.nmconnection
-```
-
-> **Note:**
->> The file naming convention, `<ssid>.nmconnection`, this is strict and case-sensitive.
-
-Each `...nmconnection` file has a format and for eduroam, which is an enterprise network it looks like this, you will need to have root level permissions:
-
-```sh
-$ sudo cat /etc/NetworkManager/system-connections/eduroam.nmconnection
-```
-**Output:**
-```sh
-[connection]
-id=eduroam
-uuid=4e3235f7-8387-4102-8a57-dd1120f29ac5
-type=wifi
-interface-name=wlan0
-permissions=user:dev:;
-
-[wifi]
-mac-address-blacklist=
-mode=infrastructure
-ssid=eduroam
-
-[wifi-security]
-auth-alg=open
-key-mmgt=wpa-eap
-
-[802-1x]
-anonymous-identity=username@gre.ac.uk
-eap=ttls;
-identity=username@greenwich.ac.uk
-password=YOURPASSWORD
-phase2-auth=mschapv2
-
-[ipv4]
-dns-search=
-method=auto
-
-[ipv6]
-addr-gen-mode=stable-privacy
-dns-search=
-method=auto
-
-[proxy]
-```
-
-> **Note** 
->> You may need to reload the connection:
->> - `nmcli connection reload` or you can do this with elevation
->> - `sudo ncmli connetion reload`
