@@ -12,7 +12,7 @@ The mdBook accessed outside of Moodle and is mobile and tablet friendly. :
 </td>
 <td>
 
-<a href="www.qr-code-generator.com/" border="0" style="cursor:default" rel="nofollow"></a><img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Funiofgreenwich.github.io%2FMSA-Summer-School%2F&chs=180x180&choe=UTF-8&chld=L|2">
+![](./mdbook-qr-code.png)
 
 </td>
 </tr>
