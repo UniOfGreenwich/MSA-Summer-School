@@ -195,26 +195,35 @@
 </li>
 <li>
 <p>Reproduce the following configuration, it is important you have no spelling or syntax errors.</p>
-<pre><code>[connection]
-id=your_esp8266_ap__ssid_lowercase
-type=wifi
-
-[wifi]
-ssid=YOUR_ESP8266_AP_SSID
-password=YOUR_ESPE8226_SSID_PASSWORD
-
-[ip4]
-method=auto
-</code></pre>
+<pre><code></code></pre>
 </li>
 </ul>
+<p>[connection]
+id=NAME_FOR_YOUR_CONNECTION
+type=wifi
+permissions=</p>
+<p>[wifi]
+mac-address-blacklist=
+mode=infrastructure
+ssid=YOUR_ESP8266_AP_SSID</p>
+<p>[wifi-security]
+key-mgmt=wpa-psk
+psk=YOUR_ESPE8226_SSID_PASSWORD</p>
+<p>[ipv4]
+dns-search=
+method=auto</p>
+<p>[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+```</p>
  </details>
  <details>
  <summary>Use `nmcli` command</summary>
 <ul>
 <li>
 <p>To create the connection entry you can use the <code>nmcli</code> command by supplying options and arguments:</p>
-<pre><code>$ nmcli con add type wifi ssid YOUR_ESP8266_AP_SSID psk YOUR_ESPE8226_SSID_PASSWORD
+<pre><code>$ nmcli con add type wifi ssid YOUR_ESP8266_AP_SSID 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk YOUR_ESPE8226_SSID_PASSWORD con-name NAME_FOR_YOUR_CONNECTION
 </code></pre>
 </li>
 </ul>
@@ -240,8 +249,9 @@ method=auto
 </li>
 <li>
 <p>You should now be connected, to test you can run the following command</p>
-<pre><code class="language-sh">$ iwconfig
+<pre><code class="language-sh">$ ifconfig
 </code></pre>
+<p><img src="./figures/IoT_Setup.png" alt="" /></p>
 </li>
 <li>
 <p>If you have a connection, open a new tab and type <code>192.168.4.1</code> to access the webapage hosted by the ESP8266:</p>
