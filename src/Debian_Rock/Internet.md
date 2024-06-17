@@ -86,11 +86,13 @@ The Debain OS for the Rock C4+ uses the `NetworkManager` package to manage all c
     >>      - once finished press <kbd>Esc</kbd> key 
     >>      - press <kbd>:</kbd> key to enter command mode and then type the following `wq!` to write, and quite, forceably. 
 
-2. To make sure you connect to the internet you can do the following: 
-    - `nmcli connection reload` or you can do this with elevation
-    - `sudo ncmli connetion reload`
+2. To make sure you connect to the internet you can do the following actions: 
+    - `sudo nmcli connection reload`
+    - `sudo nmcli con up eduroam`
 
-3. You can test the internet connection by typing the following command:
+    ![](./figures/wifi_eduroam.png)
+
+4. You can test the internet connection by typing the following command:
 
     ```sh
     $ ping -c 4 8.8.8.8

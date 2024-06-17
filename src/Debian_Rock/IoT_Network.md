@@ -23,16 +23,28 @@ Similarly to the [Internet setup](../Internet/Internet.md), we need to connect t
     * Reproduce the following configuration, it is important you have no spelling or syntax errors. 
 
         ```
-        [connection]
-        id=your_esp8266_ap__ssid_lowercase
-        type=wifi
+    [connection]
+    id=NAME_FOR_YOUR_CONNECTION
+    type=wifi
+    permissions=
 
-        [wifi]
-        ssid=YOUR_ESP8266_AP_SSID
-        password=YOUR_ESPE8226_SSID_PASSWORD
+    [wifi]
+    mac-address-blacklist=
+    mode=infrastructure
+    ssid=YOUR_ESP8266_AP_SSID
 
-        [ip4]
-        method=auto
+    [wifi-security]
+    key-mgmt=wpa-psk
+    psk=YOUR_ESPE8226_SSID_PASSWORD
+
+    [ipv4]
+    dns-search=
+    method=auto
+
+    [ipv6]
+    addr-gen-mode=stable-privacy
+    dns-search=
+    method=auto
         ```
 
     </details>
@@ -43,9 +55,8 @@ Similarly to the [Internet setup](../Internet/Internet.md), we need to connect t
      * To create the connection entry you can use the `nmcli` command by supplying options and arguments:
 
         ```
-        $ nmcli con add type wifi ssid YOUR_ESP8266_AP_SSID psk YOUR_ESPE8226_SSID_PASSWORD
+        $ nmcli con add type wifi ssid YOUR_ESP8266_AP_SSID 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk YOUR_ESPE8226_SSID_PASSWORD con-name NAME_FOR_YOUR_CONNECTION
         ```
-
     </details>
 
 
@@ -67,8 +78,10 @@ Similarly to the [Internet setup](../Internet/Internet.md), we need to connect t
 
 4. You should now be connected, to test you can run the following command
     ```sh
-    $ iwconfig
+    $ ifconfig
     ```
+
+    ![](./figures/IoT_Setup.png)
 
 5. If you have a connection, open a new tab and type `192.168.4.1` to access the webapage hosted by the ESP8266: 
 
