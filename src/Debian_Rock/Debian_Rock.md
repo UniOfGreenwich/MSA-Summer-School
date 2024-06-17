@@ -17,7 +17,11 @@ This page will give useful information for navigating the Debian OS on the Rock 
 
 3. Once logged in you will be greeted with the following view. 
 
+    ![](./figures/rock_home.png)
+
 4. Now, you need to open a terminal, press the following keys, <kbd>ctrl</kbd>+<kbd>t</kbd>, to open a terminal. 
+
+    ![](./figures/terminal.png)
 
 5. You can launch this workbook from the terminal now, or by double clicking the icon on the desktop. 
 
@@ -26,6 +30,8 @@ This page will give useful information for navigating the Debian OS on the Rock 
     > **Note*
     >> - `workbook` is the a command that will launch the web browser with the workbook url, this is local page. 
     >> - `&` *ampersand*, tells the shell to run the preceeding process in the background.
+
+    
 
 <!--
 1. `sudo apt update`
