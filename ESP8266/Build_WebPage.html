@@ -221,22 +221,63 @@
         &lt;meta http-equiv="refresh" content="5"&gt;
         &lt;title&gt; Motor Control and Monitoring Web Server &lt;/title&gt;
         &lt;style&gt;
-            div.card{
-                width:250px;
-                box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                text-align:center;
-                border-radius:5px;
-                background-color:#F5F7A0;
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #EEEDEE;
             }
-            div.header{
-                background-color:#E03C3C;
-                color:white;
-                padding:10px;
-                font-size:40px;
-                border-radius:5px;
+
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #FFFFFF;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
-            div.container{
-                padding:4px;
+
+            .header {
+                background-color: #00033D;
+                color: white;
+                text-align: center;
+                padding: 10px;
+                font-size: 24px;
+                border-radius: 5px 5px 0 0;
+            }
+
+            .status {
+                font-size: 18px;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .sensor {
+                margin-top: 20px;
+            }
+
+            .sensor h1 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .sensor h2 {
+                font-size: 16px;
+                color: #555;
+            }
+            .buttons {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 20px;
+            }
+
+            .button {
+                width: 100px;
+                height: 40px;
+                font-size: 16px;
+                background-color: #00033D;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
             }
         &lt;/style&gt;
     &lt;/head&gt;
@@ -251,6 +292,8 @@
 <li><code>div.card</code>: Styles for a card element, including width, shadow, text alignment, border radius, and background color.</li>
 <li><code>div.header</code>: Styles for the header element, including background color, text color, padding, font size, and border radius.</li>
 <li><code>div.container</code>: Styles for the container element, including padding.</li>
+<li><code>.button</code> \ <code>.buttons</code>: Styles for buttons</li>
+<li><code>.sensor</code>\ <code>.sensor h1</code> \ <code>.sensor h2</code>: stytles for sensor inforation</li>
 </ul>
 </blockquote>
 </blockquote>
@@ -261,98 +304,59 @@
 <h3 id="step-41-add-form-for-motor-control"><a class="header" href="#step-41-add-form-for-motor-control">Step 4.1: Add Form for Motor Control</a></h3>
 <pre><code class="language-html">    ...
     &lt;body&gt;
-        &lt;center&gt;&lt;h2&gt; Motor Control and Monitoring Web Server &lt;/h2&gt;
-            &lt;form method ="get" action ="/form"&gt;
-            &lt;input type ="submit" name ="button" value ="Forward" style = "width:170px;height:40px;"&gt;
-            &lt;input type ="submit" name ="button" value ="Stop" style = "width:170px;height:40px;"&gt;
-            &lt;input type ="submit" name ="button" value ="Reverse" style = "width:170px;height:40px;"&gt;
-            &lt;/form&gt;
-            &lt;h3&gt; Motor state: @@status@@&lt;/h3&gt; &lt;/br&gt;
-        &lt;/center&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="header"&gt;Motor Control Dashboard&lt;/div&gt;
+            &lt;div class="status"&gt;Motor state: &lt;span id="motorState"&gt;@@status@@&lt;/span&gt;&lt;/div&gt;
+                &lt;div class="buttons"&gt;
+                &lt;button class="button" onclick="sendCommand('Forward')"&gt;Forward&lt;/button&gt;
+                &lt;button class="button" onclick="sendCommand('Stop')"&gt;Stop&lt;/button&gt;
+                &lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;
+            &lt;/div&gt;
 </code></pre>
 <blockquote>
 <p><strong>Explanation:</strong></p>
 <blockquote>
 <ul>
-<li>
-<p><code>&lt;center&gt;&lt;h2&gt; Motor Control and Monitoring Web Server &lt;/h2&gt;&lt;/center&gt;</code>: Centers and displays a heading for the web server.</p>
-</li>
-<li>
-<p><code>&lt;form method="get" action="/form"&gt;</code>: Defines a form that sends a GET request to the /form action URL.</p>
+<li><code>&lt;div class="status"&gt;Motor state: &lt;span id="motorState"&gt;@@status@@&lt;/span&gt;&lt;/div&gt;</code>: Displays the current motor state, with <code>@@status@@</code> as a placeholder for dynamic content.</li>
+<li><code>&lt;div class="buttons"&gt;</code>: Defines the buttons class
 <ul>
 <li>
-<p><code>&lt;input type="submit" name="button" value="Forward" style="width:170px;height:40px;"&gt;</code>: Creates a submit button for "Forward" with specified dimensions.</p>
+<p><code>&lt;button class="button" onclick="sendCommand('Forward')"&gt;Forward&lt;/button&gt;</code>: Creates a submit button for "Forward" with specified dimensions.</p>
 </li>
 <li>
-<p><code>&lt;input type="submit" name="button" value="Stop" style="width:170px;height:40px;"&gt;</code>: Creates a submit button for "Stop" with specified dimensions.</p>
+<p><code>&lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;</code>: Creates a submit button for "Stop" with specified dimensions.</p>
 </li>
 <li>
-<p><code>&lt;input type="submit" name="button" value="Reverse" style="width:170px;height:40px;"&gt;</code>: Creates a submit button for "Reverse" with specified dimensions.</p>
+<p><code>&lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;</code>: Creates a submit button for "Reverse" with specified dimensions.</p>
 </li>
 </ul>
-</li>
-<li>
-<p><code>&lt;h3&gt; Motor state: @@status@@&lt;/h3&gt;</code>: Displays the current motor state, with <code>@@status@@</code> as a placeholder for dynamic content.</p>
 </li>
 </ul>
 </blockquote>
 </blockquote>
 <h3 id="step-42-add-sensor-data-display"><a class="header" href="#step-42-add-sensor-data-display">Step 4.2: Add Sensor Data Display</a></h3>
 <pre><code class="language-html">...
-        &lt;center&gt;
-            &lt;div class="card"&gt;
-                &lt;div class="header"/&gt;
-                &lt;div class="container"&gt;
-                    &lt;h1&gt;TMP36_Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@m_temp@@ &amp;deg;C&lt;/h1&gt;
+    &lt;&lt;div class="sensor"&gt;
+        &lt;h1&gt;Motor Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="motorTemp"&gt;@@m_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-                    &lt;h1&gt;DHT11_Ambient_Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@a_temp@@ &amp;deg;C&lt;/h1&gt;
+        &lt;h1&gt;Ambient Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="ambientTemp"&gt;@@a_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-                    &lt;h1&gt;DHT11_Humidity&lt;/h1&gt;
-                    &lt;h1&gt; @@humidity@@ &amp;percnt;&lt;/h1&gt;
+        &lt;h1&gt;Humidity&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="humidity"&gt;@@humidity@@ &amp;percnt;&lt;/span&gt;&lt;/h2&gt;
 
-                    &lt;h1&gt;Motor Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@motor_temp@@ &amp;deg;C&lt;/h1&gt;
+        &lt;h1&gt;Enclosure Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="enclosureTemp"&gt;@@motor_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-                    &lt;h1&gt;Motor Speed&lt;/h1&gt;
-                    &lt;h1&gt; @@motor_speed@@ RPM&lt;/h1&gt;
+        &lt;h1&gt;Motor Speed&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="motorSpeed"&gt;@@motor_speed@@ RPM&lt;/span&gt;&lt;/h2&gt;
 
-                    &lt;h1&gt;Average Vibration&lt;/h1&gt;
-                    &lt;h1&gt; @@vibration@@ g&lt;/h1&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/center&gt;
+        &lt;h1&gt;Average Vibration&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="vibration"&gt;@@vibration@@ g&lt;/span&gt;&lt;/h2&gt;
+    &lt;/div&gt;
     &lt;/body&gt;
 </code></pre>
-<blockquote>
-<p><strong>Explanation:</strong></p>
-<blockquote>
-<ul>
-<li>
-<p><code>&lt;center&gt;</code>: Centers the content on the page.</p>
-</li>
-<li>
-<p><code>&lt;div class="card"&gt;</code>: Defines a card element with the class card.</p>
-</li>
-<li>
-<p><code>&lt;div class="header"/&gt;</code>: Defines a header element with the class header.</p>
-</li>
-<li>
-<p><code>&lt;div class="container"&gt;</code>: Defines a container element with the class container.</p>
-</li>
-<li>
-<p><code>&lt;h1&gt;TMP36_Temperature&lt;/h1&gt;</code>: Displays the title for TMP36 temperature.</p>
-</li>
-<li>
-<p><code>&lt;h1&gt; @@m_temp@@ &amp;deg;C&lt;/h1&gt;</code>: Displays the TMP36 temperature value with <code>@@m_temp@@</code> as a placeholder for dynamic content, followed by the degree Celsius symbol.</p>
-</li>
-<li>
-<p>Similar sections for DHT11 ambient temperature, DHT11 humidity, motor temperature, motor speed, and average vibration, each with appropriate placeholders (<code>@@a_temp@@</code>, <code>@@humidity@@</code>, <code>@@motor_temp@@</code>, <code>@@motor_speed@@</code>, and <code>@@vibration@@</code>).</p>
-</li>
-</ul>
-</blockquote>
-</blockquote>
 <h2 id="step-5-end-the-html-document"><a class="header" href="#step-5-end-the-html-document">Step 5: End the HTML Document</a></h2>
 <p>Close the HTML document with the closing <code>&lt;/html&gt;</code> tag and the closing delimiter for the raw string literal.</p>
 <pre><code class="language-html">...
@@ -385,66 +389,100 @@
 <pre><code class="language-html">const char MAIN_page[]PROGMEM=R"=====(
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
-    &lt;head&gt;
-        &lt;meta http-equiv="refresh" content="5"&gt;
-        &lt;title&gt; Motor Control and Monitoring Web Server &lt;/title&gt;
-        &lt;style&gt;
-            div.card{
-                width:250px;
-                box-shadow:0 4px 8px 0 rgba (0, 0, 0, 0.2), 0 6px 20px 0 rgba (0, 0, 0, 0.19);
-                text-align:center;
-                border-radius:5px;
-                background-color:# F5F7A0
-            }
-            div.header{
-                background-color:# E03C3C;
-                color:white ;
-                padding:10px;
-                font-size:40px;
-                border-radius:5px;
-            }
-            div.container{
-                padding:4px;
-            }
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;center&gt;&lt;h2&gt; Motor Control and Monitoring Web Server &lt;/h2&gt;
-            &lt;form method ="get" action ="/form"&gt;
-            &lt;input type ="submit" name ="button" value ="Forward" style =  "width:170px;height:40px;"&gt;
-            &lt;input type ="submit" name ="button" value ="Stop" style =  "width:170px;height:40px;"&gt;
-            &lt;input type ="submit" name ="button" value ="Reverse" style =  "width:170px;height:40px;"&gt;
-            &lt;/form&gt;
-            &lt;h3&gt; Motor state: @@status@@&lt;/h3&gt; &lt;/br&gt;
-        &lt;/center&gt;
-    &lt;/body&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="refresh" content="5"&gt;
+    &lt;title&gt;Motor Control and Monitoring&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EEEDEE;
+        }
 
-    &lt;body&gt;
-        &lt;center&gt;
-            &lt;div class="card"&gt;
-                &lt;div class="header"/&gt;
-                &lt;div class = "container"&gt;
-                    &lt;h1&gt;TMP36_Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@m_temp@@   &amp;deg;C&lt;/h1&gt;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-                    &lt;h1&gt;DHT11_Ambient_Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@a_temp@@   &amp;deg;C&lt;/h1&gt;
+        .header {
+            background-color: #00033D;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 5px 5px 0 0;
+        }
 
-                    &lt;h1&gt;DHT11_Humidity&lt;/h1&gt;
-                    &lt;h1&gt; @@humidity@@   &amp;percnt;&lt;/h1&gt;
+        .status {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-                    &lt;h1&gt;Motor Temperature&lt;/h1&gt;
-                    &lt;h1&gt; @@motor_temp@@   &amp;deg;C&lt;/h1&gt;
+        .sensor {
+            margin-top: 20px;
+        }
 
-                    &lt;h1&gt;Motor Speed&lt;/h1&gt;
-                    &lt;h1&gt; @@motor_speed@@   RPM&lt;/h1&gt;
+        .sensor h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
 
-                    &lt;h1&gt;Average Vibration&lt;/h1&gt;
-                    &lt;h1&gt; @@vibration@@   g&lt;/h1&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/center&gt;
-    &lt;/body&gt;
+        .sensor h2 {
+            font-size: 16px;
+            color: #555;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .button {
+            width: 100px;
+            height: 40px;
+            font-size: 16px;
+            background-color: #00033D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container"&gt;
+    &lt;div class="header"&gt;Motor Control Dashboard&lt;/div&gt;
+    &lt;div class="status"&gt;Motor state: &lt;span id="motorState"&gt;@@status@@&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="buttons"&gt;
+        &lt;button class="button" onclick="sendCommand('Forward')"&gt;Forward&lt;/button&gt;
+        &lt;button class="button" onclick="sendCommand('Stop')"&gt;Stop&lt;/button&gt;
+        &lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="sensor"&gt;
+        &lt;h1&gt;Motor Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="motorTemp"&gt;@@m_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+
+        &lt;h1&gt;Ambient Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="ambientTemp"&gt;@@a_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+
+        &lt;h1&gt;Humidity&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="humidity"&gt;@@humidity@@ &amp;percnt;&lt;/span&gt;&lt;/h2&gt;
+
+        &lt;h1&gt;Enclosure Temperature&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="enclosureTemp"&gt;@@motor_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+
+        &lt;h1&gt;Motor Speed&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="motorSpeed"&gt;@@motor_speed@@ RPM&lt;/span&gt;&lt;/h2&gt;
+
+        &lt;h1&gt;Average Vibration&lt;/h1&gt;
+        &lt;h2&gt;&lt;span id="vibration"&gt;@@vibration@@ g&lt;/span&gt;&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
 &lt;/html&gt;
 )=====";
 </code></pre>
