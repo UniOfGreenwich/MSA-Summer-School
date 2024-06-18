@@ -8,6 +8,10 @@
 - [ESP8266](ESP8266/Set_Up.md)
     - [ESP8266](ESP8266/Set_Up.md)
     - [Testing Sensors](ESP8266/Testing_Sensors.md)
+        - [Temperature](ESP8266/Temperature.md)
+        - [DHT11 - Humidity](ESP8266/DHT11_Humidity.md)
+        - [Photo Interrupter](ESP8266/Photo_Interrupter.md)
+        - [Accelerometer](ESP8266/Accelerometer.md)
     - [Build Webpage](ESP8266/Build_WebPage.md)
     - [IoT Setup](ESP8266/IoT_Setup.md)
 - [Debian Rock C4](Debian_Rock/Debian_Rock.md)
@@ -16,6 +20,3 @@
      - [IoT Network](Debian_Rock/IoT_Network.md)
      - [Python Script](Debian_Rock/Python_Script.md)
      - [WireShark](Debian_Rock/WireShark.md)
-     
-
-
