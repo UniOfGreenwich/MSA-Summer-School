@@ -34,32 +34,18 @@
 |Use ceramic for1uF||
 |Electrolyticfor C3/C7||
 
-## IC's
+## IC's & Others
 
-|IC’s|Value|
-|---|---|
-|U1|7810|
-|U2|7805|
-|U3|BD6221|
-|U4|LM2917-8|
-|U5|AD822|
-|U6|74HC4051|
-|TMP36|2|
-|Humidity|DHT22|
-
-
-## Other
-
-|Other|Value|
-|---|---|
-|Diode D1|1N4001|
-|LED|3mm x 2|
-|Lolin D1|Micro|
-|MMA8451|Accel|
-|Opto|KTIR611S|
-|Motor|DC|
-|Motor|Bracket|
-|Motor Clips|4|
-|Rubber Feet|4|
-|Connector|Male (J1)|
-|Connector|Female (J1)
+|IC’s|Value||Other|Value|
+|---|---|---|---|---|
+|U1|7810||Diode D1|1N4001|
+|U2|7805||LED|3mm x 2|
+|U3|BD6221||Lolin D1|Micro|
+|U4|LM2917-8||MMA8451|Accel|
+|U5|AD822||Opto|KTIR611S|
+|U6|74HC4051||Motor|DC|
+|TMP36|2||Motor|Bracket|
+|Humidity|DHT22||Motor Clips|4|
+||||Rubber Feet|4|
+||||Connector|Male (J1)|
+||||Connector|Female (J1)|
