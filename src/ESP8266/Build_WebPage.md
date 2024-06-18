@@ -2,6 +2,10 @@
 
 This guide will help you build an HTML page for a motor control and monitoring web server. This page is hosted by the Arduino web server and will be served when someone connects to the correct IP address.
 
+Should look like this once complete:
+
+![](./figures/motor_dashboard.png)
+
 ## Step 1: Define the HTML Page
 
 1. Open a new file in your Arduino script folder called `index.h`
