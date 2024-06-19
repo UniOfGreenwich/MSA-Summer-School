@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">2.</strong> Documentation</a></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">3.</strong> Soldering Instructions</a></li><li class="chapter-item expanded "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.1.</strong> ESP8266</a></li><li class="chapter-item expanded "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">4.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ESP8266/Temperature.html" class="active"><strong aria-hidden="true">4.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="../ESP8266/DHT11_Humidity.html"><strong aria-hidden="true">4.2.2.</strong> DHT11 - Humidity</a></li><li class="chapter-item "><a href="../ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">4.2.3.</strong> Photo Interrupter</a></li><li class="chapter-item "><a href="../ESP8266/Accelerometer.html"><strong aria-hidden="true">4.2.4.</strong> Accelerometer</a></li></ol></li><li class="chapter-item "><a href="../ESP8266/Build_WebPage.html"><strong aria-hidden="true">4.3.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">4.4.</strong> IoT Setup</a></li></ol></li><li class="chapter-item "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">5.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">5.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">5.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">5.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">5.4.</strong> Python Script</a></li><li class="chapter-item "><a href="../Debian_Rock/WireShark.html"><strong aria-hidden="true">5.5.</strong> WireShark</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">2.</strong> Documentation</a></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">3.</strong> Soldering Instructions</a></li><li class="chapter-item expanded "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.1.</strong> ESP8266</a></li><li class="chapter-item expanded "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">4.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ESP8266/Temperature.html" class="active"><strong aria-hidden="true">4.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="../ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">4.2.2.</strong> Photo Interrupter</a></li><li class="chapter-item "><a href="../ESP8266/Accelerometer.html"><strong aria-hidden="true">4.2.3.</strong> Accelerometer</a></li></ol></li><li class="chapter-item "><a href="../ESP8266/Build_WebPage.html"><strong aria-hidden="true">4.3.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">4.4.</strong> IoT Setup</a></li></ol></li><li class="chapter-item "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">5.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">5.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">5.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">5.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">5.4.</strong> Python Script</a></li><li class="chapter-item "><a href="../Debian_Rock/WireShark.html"><strong aria-hidden="true">5.5.</strong> WireShark</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -172,7 +172,224 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="temperature"><a class="header" href="#temperature">Temperature</a></h1>
+<p>We are going to test the temperature sensors at the same time so we can take adavantage of the MUX at the same time.</p>
+<p>In order to understand the this component it is important to review the supporting technical documentation:</p>
+<ul>
+<li>
+<p><a href="../../Data_Sheets/TMP35_36_37.pdf">TMP35/36 Datasheet</a></p>
+</li>
+<li>
+<p><a href="../../Data_Sheets/humidity_sensor.pdf">DHT11/22 Datasheet</a></p>
+</li>
+</ul>
+<p>Normally we would have to write the code to obtain the information from the components. We need to do that just for the DHT11 component:</p>
+<ul>
+<li><a href="https://github.com/beegee-tokyo/DHTesp/blob/master/DHTesp.h">DHTesp.h</a></li>
+</ul>
+<p>Luckily you can click these links below to download the zips that needed to be addedd to the Arduino Libraries:</p>
+<ul>
+<li><a href="https://github.com/beegee-tokyo/DHTesp/archive/refs/heads/master.zip">DHTesp</a></li>
+</ul>
+<p>Once downloaded, you can use the import function within the Arduino software to unzip the folders into <code>/path/to/Arduino/Libraries/</code>, <code>Sketch</code> -&gt; <code>Include Library</code> -&gt; <code>Add .Zip Library...</code>, then navigate to the <code>/path/to/zipped_library</code> to include it.</p>
+<h2 id="developing-the-script"><a class="header" href="#developing-the-script">Developing the script</a></h2>
+<ol>
+<li>
+<p>Create a new a script call it something meaningful like, <code>accelerometer_test.ino</code></p>
+</li>
+<li>
+<p>Start by adding the standard header information about the script</p>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.O
+* NOTES: 
+*      - for testing the 2x TMP36 Temperature sensors 
+*      - and DHT11  Humidity and Temperature sensor
+*/
+</code></pre>
+</li>
+<li>
+<p>Using the <code>#include</code> directive reference the wire, Adafruit_MMA845, Adafruit_Sensor libraries:</p>
+<pre><code class="language-cpp">...
 
+#include &lt;DHTesp.h&gt;
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<blockquote>
+<ul>
+<li>If you see <code>...</code> that means that other code is hidden for brevity</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>Next we are going to create some global variables that we can reference to perform calculations:</p>
+<pre><code class="language-cpp">...
+const float voltage_conversion_factor = 0.004;
+const float temperature_conversion_factor = 17.5;
+const float temperature_offset = 20;
+
+float m_Temp, m_Temp_v, a_Temp, a_Temp_v; // m = motor, a = ambient
+float h ,t; // dht values
+</code></pre>
+</li>
+<li>
+<p>Because <code>cpp</code> is a obkect orientated programming lanaguage we have the ability to use repeatable templates (<em>classes</em>) for code as <em>objects</em>. Next we create object of the <code>DHTesp</code> class</p>
+<pre><code class="language-cpp">...
+
+DHTesp dht;
+</code></pre>
+</li>
+<li>
+<p>Next we need to add the following code to inside the <code>void setup(void)</code>:</p>
+<ul>
+<li>Set up serial communication</li>
+<li>Set pin modes</li>
+<li>Set up our <code>dht</code> objects to communicate with the DHT22 sensor.</li>
+</ul>
+<pre><code class="language-cpp">...
+void setup(void) {
+    dht.setup(D6, DHTesp::DHT22);
+
+    Serial.begin(9600);
+    Serial.println("");
+    
+    //Set up ports
+    //D1 and D2 SCL and SCA
+    pinMode(D3, OUTPUT);  //Mux A
+    pinMode(D4, OUTPUT);  //Mux B
+    pinMode(D6, INPUT);   //Humidity
+    pinMode(A0, INPUT);   //Analogue input
+}
+</code></pre>
+</li>
+<li>
+<p>Next we need to place some code in the <code>void loop</code> function to call another function that gets the temperature values</p>
+<pre><code class="language-cpp">...
+
+void loop(void) {
+    getTemp();
+    delay(1000);
+}
+</code></pre>
+</li>
+<li>
+<p>Next we can add the <code>getTemp()</code> function:</p>
+<pre><code class="language-cpp">void getTemp() {
+
+    //Motor Temp sensor reading
+    digitalWrite(D3, HIGH); // Using the MUX to switch sensors
+    digitalWrite(D4, LOW);
+    m_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+    m_Temp_v = m_Temp * voltage_conversion_factor;
+    m_Temp = ((temperature_conversion_factor * m_Temp_v) - temperature_offset);
+    Serial.print("Motor Temp: ");
+    Serial.println(m_Temp);
+    delay(200);
+
+    //Amb Temp sensor reading
+    digitalWrite(D3, LOW); // Using the MUX to switch sensors
+    digitalWrite(D4, HIGH);
+    a_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+    a_Temp_v = a_Temp * voltage_conversion_factor;
+    a_Temp = (temperature_conversion_factor * a_Temp_v) - temperature_offset;
+    Serial.print("Ambient Temp: ");
+    Serial.println(a_Temp);
+    delay(200);
+
+    //Humidity sensor reading
+    h = dht.getHumidity();
+    t = dht.getTemperature();
+    Serial.print("DHT11 Hum: ");
+    Serial.print(h);
+    Serial.print(" Temp: ");
+    Serial.println(t);
+    delay(200);
+}
+</code></pre>
+</li>
+<li>
+<p>If you run this code you will see the following output:</p>
+<p><img src="./figures/temperature_out.png" alt="" /></p>
+</li>
+</ol>
+<h2 id="full-code-here"><a class="header" href="#full-code-here">Full code here</a></h2>
+<details>
+<summary>Click for full code:</summary>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.O
+* NOTES: 
+*      - for testing the 2x TMP36 Temperature sensors 
+*      - and DHT11  Humidity and Temperature sensor
+*/
+
+#include &lt;DHTesp.h&gt;
+
+const float voltage_conversion_factor = 0.004;
+const float temperature_conversion_factor = 17.5;
+const float temperature_offset = 20;
+
+float m_Temp, m_Temp_v, a_Temp, a_Temp_v;
+float h ,t;
+
+DHTesp dht;
+
+void setup(void) {
+  dht.setup(D6, DHTesp::DHT22);
+
+  Serial.begin(9600);
+  Serial.println("");
+  
+  //Set up ports
+  //D1 and D2 SCL and SCA
+  pinMode(D3, OUTPUT);  //Mux A
+  pinMode(D4, OUTPUT);  //Mux B
+  pinMode(D6, INPUT);   //Humidity
+  pinMode(A0, INPUT);   //Analogue input
+}
+
+
+void loop(void) {
+  getTemp();
+  delay(1000);
+}
+
+
+void getTemp() {
+
+  //Motor Temp sensor reading
+  digitalWrite(D3, HIGH);
+  digitalWrite(D4, LOW);
+  m_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+  m_Temp_v = m_Temp * voltage_conversion_factor;
+  m_Temp = ((temperature_conversion_factor * m_Temp_v) - temperature_offset);
+  Serial.print("Motor Temp: ");
+  Serial.println(m_Temp);
+  delay(200);
+
+  //Amb Temp sensor reading
+  digitalWrite(D3, LOW);
+  digitalWrite(D4, HIGH);
+  a_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+  a_Temp_v = a_Temp * voltage_conversion_factor;
+  a_Temp = (temperature_conversion_factor * a_Temp_v) - temperature_offset;
+  Serial.print("Ambient Temp: ");
+  Serial.println(a_Temp);
+  delay(200);
+
+  //Humidity sensor reading
+  h = dht.getHumidity();
+  t = dht.getTemperature();
+  Serial.print("DHT11 Hum: ");
+  Serial.print(h);
+  Serial.print(" Temp: ");
+  Serial.println(t);
+  delay(200);
+
+}
+</code></pre>
+</details>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -181,7 +398,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../ESP8266/DHT11_Humidity.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../ESP8266/Photo_Interrupter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -195,7 +412,7 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../ESP8266/DHT11_Humidity.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../ESP8266/Photo_Interrupter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
