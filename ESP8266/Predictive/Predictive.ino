@@ -78,7 +78,7 @@ void handleRoot() {
   digitalWrite(D4, HIGH);
   a_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
   a_Temp_v = a_Temp * voltage_conversion_factor;
-  a_Temp = ((temperature_conversion_factor / 4) * a_Temp_v) - temperature_offset;
+  a_Temp = (temperature_conversion_factor * a_Temp_v) - temperature_offset;
   Serial.println(a_Temp);
   delay(200);
 
