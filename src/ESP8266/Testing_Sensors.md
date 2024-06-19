@@ -8,7 +8,7 @@ We can test in the components in combinations afterwards if needed. This is more
 
 - [TMP36 - Ambient Temperature && Motor Tempeature && DH11 Temperature](./Temperature.md)
 
-- [DHT11 - Humidity](./DHT11_Humidity.md)
+- [DHT22 - Humidity](./DHT22_Humidity.md)
 
 
 - [MMA85451Q - Accelerometer](./Accelerometer.md)

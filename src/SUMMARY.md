@@ -9,7 +9,6 @@
     - [ESP8266](ESP8266/Set_Up.md)
     - [Testing Sensors](ESP8266/Testing_Sensors.md)
         - [Temperature](ESP8266/Temperature.md)
-        - [DHT11 - Humidity](ESP8266/DHT11_Humidity.md)
         - [Photo Interrupter](ESP8266/Photo_Interrupter.md)
         - [Accelerometer](ESP8266/Accelerometer.md)
     - [Build Webpage](ESP8266/Build_WebPage.md)
