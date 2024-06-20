@@ -1,23 +1,45 @@
 /*
 * AUTHORS: YOUR NAMES
-* VERSION: 1.0.O
+* VERSION: 1.0.0
 * NOTES: 
-*      - for testing the 2x TMP36 Temperature sensors 
-*      - and DHT11  Humidity and Temperature sensor
+*      - Motor Speed is calculated using the Ktir0611s Photo Interrupter
+*      - Motor will go forward, reverse and then stop in a loop and show speed in RPM
 */
 
+// set variables 
+const int noise_threshold = 20;
 const float motor_speed_conversion_factor = 24.6;
 float motor_speed;
 
 void setup(){
-    Serial.begin(9600);
+  // initialise the serial
+  Serial.begin(9600);
+  
+  //Motor speed reading
+  digitalWrite(D3, LOW);
+  digitalWrite(D4, LOW);
 }
 
 void loop(){
 
-     //Motor speed reading
-  digitalWrite(D3, LOW);
-  digitalWrite(D4, LOW);
+  digitalWrite(D5, LOW);  // Motor Forward
+  analogWrite(D0, 500);   // you change the speed here
+  calculateSpeed();
+  delay(100);
+
+  digitalWrite(D0, LOW);  // Motor Stop
+  analogWrite(D5, LOW);
+  calculateSpeed();  
+  delay(100);
+
+  digitalWrite(D0, LOW);  // Motor Reverse
+  analogWrite(D5, 500);   // you change the speed here
+  calculateSpeed();
+  delay(100);
+}
+
+void calculateSpeed(){
+  // read 
   motor_speed = analogRead(A0);
   delay(200);
 

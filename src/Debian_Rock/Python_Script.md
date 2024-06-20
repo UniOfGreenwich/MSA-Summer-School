@@ -351,6 +351,8 @@ $ less +G predictiveMaintenance/data.log
 
 The output these commands should look something like this, and everytime there is a change you get an additionally line with the latest data. 
 
+![](./figures/dataout.png)
+
 ## Step 10: Gathering the Data
 
 We need to let the data run for some time to build a large enough data set for any predictive modelling. We can estimate the number lines generated over a given period, as we know that there is a delay of ~500ms. So roughly 2 every second, calculate how many data points you can have for:

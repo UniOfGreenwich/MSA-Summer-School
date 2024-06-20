@@ -69,11 +69,11 @@ const char MAIN_page[]PROGMEM=R"=====(
 <div class="container">
     <div class="header">Motor Control Dashboard</div>
     <div class="status">Motor state: <span id="motorState">@@status@@</span></div>
-        <div class="buttons">
-        <button class="button" onclick="sendCommand('Forward')">Forward</button>
-        <button class="button" onclick="sendCommand('Stop')">Stop</button>
-        <button class="button" onclick="sendCommand('Reverse')">Reverse</button>
-    </div>
+        <form method ="get" action= "/form" class="buttons">
+          <input type=submit name="button" value="Forward" class=button>
+          <input type=submit name="button" value="Stop" class=button>
+          <input type=submit name="button" value="Reverse" class=button>
+        </form>
     <div class="sensor">
         <h1>Motor Temperature</h1>
         <h2><span id="motorTemp">@@m_temp@@  &deg;C</span></h2>
