@@ -172,8 +172,175 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="photo-interrupter"><a class="header" href="#photo-interrupter">Photo Interrupter</a></h1>
-<p>The Photo Interrupter will allow us to monitor the motors speed by counting.</p>
+<p>The KTIR6011S is an infrared emitter and phototransistor pair enclosed in a single package. This type of device is commonly used for reflective object sensing, proximity sensing, and encoder applications for instance ot monitor the motors speed by counting the interrupts in via the spokes of a wheel.</p>
+<p>In order to understand the this component it is important to review the supporting technical documentation:</p>
+<ul>
+<li><a href="../../Data_Sheets/ktir0611s.pdf">KTIR0611S Photo Interrupter Datasheet</a></li>
+</ul>
+<div align=center>
+<img src="./figures/ktir0611s.jpg" alt="ktir6011s sensor" width=30%>
+</div>
+<blockquote>
+<p><strong>Note:</strong> No external libraries needed for this</p>
+</blockquote>
+<h2 id="developing-the-script"><a class="header" href="#developing-the-script">Developing the script</a></h2>
+<ol>
+<li>
+<p>Create a new a script call it something meaningful like, <code>motor_speed.ino</code></p>
+</li>
+<li>
+<p>Start by adding the standard header information about the script</p>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.0
+* NOTES: 
+*      - Motor Speed is calculated using the Ktir0611s Photo Interrupter
+*      - Motor will go forward, reverse and then stop in a loop and 
+*        show speed in RPM
+*/
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<blockquote>
+<ul>
+<li>If you see <code>...</code> that means that other code is hidden for brevity</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>Next we need to set the global variables needed throughout the script:</p>
+<pre><code class="language-cpp">...
 
+// set variables 
+const int noise_threshold = 20;
+const float motor_speed_conversion_factor = 24.6;
+float motor_speed;
+</code></pre>
+</li>
+<li>
+<p>Now we can sort of the setup block so that we permentatly set the mux to the right channel and baudrate for the Serial:</p>
+<pre><code class="language-cpp">...
+void setup(){
+    // initialise the serial
+    Serial.begin(9600);
+    
+    //Set MUX to the correct channel
+    digitalWrite(D3, LOW);
+    digitalWrite(D4, LOW);
+}
+</code></pre>
+</li>
+<li>
+<p>Penultimately we are going to fill the void loop with the core functionality of programme:</p>
+<blockquote>
+<p><strong>Note:</strong> we will write the <code>calculateSpeed()</code> after this step.</p>
+</blockquote>
+<pre><code class="language-cpp">...
+void loop(){
+
+    digitalWrite(D5, LOW);  // Motor Forward
+    analogWrite(D0, 500);   // you change the speed here
+    calculateSpeed();
+    delay(100);
+
+    digitalWrite(D0, LOW);  // Motor Stop
+    analogWrite(D5, LOW);
+    calculateSpeed();  
+    delay(100);
+
+    digitalWrite(D0, LOW);  // Motor Reverse
+    analogWrite(D5, 500);   // you change the speed here
+    calculateSpeed();
+    delay(100);
+}
+</code></pre>
+</li>
+<li>
+<p>Finally, we can add write the bit of code tha calcualtes the motor speed based on the number of...</p>
+<pre><code class="language-cpp">void calculateSpeed(){
+    // read 
+    motor_speed = analogRead(A0);
+    delay(200);
+
+        //Eliminate analogue input noise
+    if (motor_speed &lt; noise_threshold) {
+        motor_speed = 0;
+    }
+
+    //Calibrate motor speed
+    motor_speed = motor_speed * motor_speed_conversion_factor;
+    Serial.print(motor_speed);
+    Serial.println(" RPM");
+}
+</code></pre>
+</li>
+<li>
+<p>If you run the code you should see the following output:</p>
+</li>
+</ol>
+<hr />
+<h2 id="full-code-below"><a class="header" href="#full-code-below">Full code below</a></h2>
+<details>
+<summary>Click here:</summary>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.0
+* NOTES: 
+*      - Motor Speed is calculated using the Ktir0611s Photo Interrupter
+*      - Motor will go forward, reverse and then stop in a loop and show 
+*        speed in RPM
+*/
+
+// set variables 
+const int noise_threshold = 20;
+const float motor_speed_conversion_factor = 24.6;
+float motor_speed;
+
+void setup(){
+  // initialise the serial
+  Serial.begin(9600);
+  
+  //Set MUX to the correct channel
+  digitalWrite(D3, LOW);
+  digitalWrite(D4, LOW);
+}
+
+void loop(){
+
+  digitalWrite(D5, LOW);  // Motor Forward
+  analogWrite(D0, 500);   // you change the speed here
+  calculateSpeed();
+  delay(100);
+
+  digitalWrite(D0, LOW);  // Motor Stop
+  analogWrite(D5, LOW);
+  calculateSpeed();  
+  delay(100);
+
+  digitalWrite(D0, LOW);  // Motor Reverse
+  analogWrite(D5, 500);   // you change the speed here
+  calculateSpeed();
+  delay(100);
+}
+
+void calculateSpeed(){
+  // read 
+  motor_speed = analogRead(A0);
+  delay(200);
+
+    //Eliminate analogue input noise
+  if (motor_speed &lt; noise_threshold) {
+    motor_speed = 0;
+  }
+
+  //Calibrate motor speed
+  motor_speed = motor_speed * motor_speed_conversion_factor;
+  Serial.print(motor_speed);
+  Serial.println(" RPM");
+}
+</code></pre>
+</details>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
