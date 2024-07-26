@@ -27,7 +27,7 @@ Once downloaded, you can use the import function within the Arduino software to 
     ```cpp
     /*
     * AUTHORS: YOUR NAMES
-    * VERSION: 1.0.O
+    * VERSION: 1.0.0
     * NOTES: 
     *      - for testing the 2x TMP36 Temperature sensors 
     *      - and DHT11  Humidity and Temperature sensor
@@ -150,7 +150,7 @@ Once downloaded, you can use the import function within the Arduino software to 
 ```cpp
 /*
 * AUTHORS: YOUR NAMES
-* VERSION: 1.0.O
+* VERSION: 1.0.0
 * NOTES: 
 *      - for testing the 2x TMP36 Temperature sensors 
 *      - and DHT11  Humidity and Temperature sensor

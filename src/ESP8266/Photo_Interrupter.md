@@ -5,6 +5,7 @@ The KTIR6011S is an infrared emitter and phototransistor pair enclosed in a sing
 In order to understand the this component it is important to review the supporting technical documentation: 
 
 - [KTIR0611S Photo Interrupter Datasheet](../../Data_Sheets/ktir0611s.pdf)
+- [LM2917 Frequency to Voltage Converter](../../Data_Sheets/lm2917-n.pdf)
 
 <div align=center>
 
@@ -50,12 +51,18 @@ In order to understand the this component it is important to review the supporti
     ```cpp
     ...
     void setup(){
-        // initialise the serial
-        Serial.begin(9600);
-        
-        //Set MUX to the correct channel
-        digitalWrite(D3, LOW);
-        digitalWrite(D4, LOW);
+      // initialise the serial
+      Serial.begin(9600);
+      
+      pinMode(D0, OUTPUT);  //PWM
+      pinMode(D3, OUTPUT);  //Mux A
+      pinMode(D4, OUTPUT);  //Mux B
+      pinMode(D5, OUTPUT);  //Direction
+      pinMode(A0, INPUT);   //Analogue input
+
+      //Motor speed reading
+      digitalWrite(D3, LOW);
+      digitalWrite(D4, LOW);
     }
     ``` 
 
@@ -67,20 +74,28 @@ In order to understand the this component it is important to review the supporti
     ...
     void loop(){
 
-        digitalWrite(D5, LOW);  // Motor Forward
-        analogWrite(D0, 500);   // you change the speed here
-        calculateSpeed();
-        delay(100);
+      digitalWrite(D5, LOW);  // Motor Forward
+      analogWrite(D0, 500);   // you change the speed here
+      delay(1000);
+      calculateSpeed("Forward");
+      
 
-        digitalWrite(D0, LOW);  // Motor Stop
-        analogWrite(D5, LOW);
-        calculateSpeed();  
-        delay(100);
+      digitalWrite(D0, LOW);  // Motor Stop
+      analogWrite(D5, LOW);
+      delay(1000);
+      calculateSpeed("Stop");  
 
-        digitalWrite(D0, LOW);  // Motor Reverse
-        analogWrite(D5, 500);   // you change the speed here
-        calculateSpeed();
-        delay(100);
+
+      digitalWrite(D0, LOW);  // Motor Reverse
+      analogWrite(D5, 500);   // you change the speed here
+      delay(1000);
+      calculateSpeed("Reverse");
+    
+
+      digitalWrite(D0, LOW);  // Motor Stop
+      analogWrite(D5, LOW);
+      delay(1000);
+      calculateSpeed("Stop");  
     }
     ```
 
@@ -90,9 +105,9 @@ In order to understand the this component it is important to review the supporti
     void calculateSpeed(){
         // read 
         motor_speed = analogRead(A0);
-        delay(200);
+        delay(500);
 
-            //Eliminate analogue input noise
+            //Eliminate analogue input noise give motor chance to slow down/speed up
         if (motor_speed < noise_threshold) {
             motor_speed = 0;
         }
@@ -104,8 +119,11 @@ In order to understand the this component it is important to review the supporti
     }
     ```
 
+    - The `motor_speed_conversion_factor` value of 24.6 is the result of a the LM2917 (U4) frequency to voltage converter. The converter ouptsa  voltage that is proportional to the input frequency and is scaled by the value 24.6 to the the rpm.
+
 7. If you run the code you should see the following output: 
 
+  ![](./figures/motor_speed_serial.png)
 
 -------------------------------
 
@@ -120,8 +138,7 @@ In order to understand the this component it is important to review the supporti
 * VERSION: 1.0.0
 * NOTES: 
 *      - Motor Speed is calculated using the Ktir0611s Photo Interrupter
-*      - Motor will go forward, reverse and then stop in a loop and show 
-*        speed in RPM
+*      - Motor will go forward, reverse and then stop in a loop and show speed in RPM
 */
 
 // set variables 
@@ -133,41 +150,57 @@ void setup(){
   // initialise the serial
   Serial.begin(9600);
   
-  //Set MUX to the correct channel
+  pinMode(D0, OUTPUT);  //PWM
+  pinMode(D3, OUTPUT);  //Mux A
+  pinMode(D4, OUTPUT);  //Mux B
+  pinMode(D5, OUTPUT);  //Direction
+  pinMode(A0, INPUT);   //Analogue input
+
+  //Motor speed reading
   digitalWrite(D3, LOW);
   digitalWrite(D4, LOW);
+
 }
 
 void loop(){
 
   digitalWrite(D5, LOW);  // Motor Forward
   analogWrite(D0, 500);   // you change the speed here
-  calculateSpeed();
-  delay(100);
+  delay(1000);
+  calculateSpeed("Forward");
+  
 
   digitalWrite(D0, LOW);  // Motor Stop
   analogWrite(D5, LOW);
-  calculateSpeed();  
-  delay(100);
+  delay(1000);
+  calculateSpeed("Stop");  
+
 
   digitalWrite(D0, LOW);  // Motor Reverse
   analogWrite(D5, 500);   // you change the speed here
-  calculateSpeed();
-  delay(100);
+  delay(1000);
+  calculateSpeed("Reverse");
+ 
+
+  digitalWrite(D0, LOW);  // Motor Stop
+  analogWrite(D5, LOW);
+  delay(1000);
+  calculateSpeed("Stop");  
 }
 
-void calculateSpeed(){
+void calculateSpeed(String state){
   // read 
   motor_speed = analogRead(A0);
-  delay(200);
+  delay(500);
 
-    //Eliminate analogue input noise
-  if (motor_speed < noise_threshold) {
+  if(motor_speed < noise_threshold){
     motor_speed = 0;
   }
 
   //Calibrate motor speed
   motor_speed = motor_speed * motor_speed_conversion_factor;
+  Serial.print(state);
+  Serial.print(": ");
   Serial.print(motor_speed);
   Serial.println(" RPM");
 }
