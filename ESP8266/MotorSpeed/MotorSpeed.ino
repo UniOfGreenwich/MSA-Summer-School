@@ -15,41 +15,57 @@ void setup(){
   // initialise the serial
   Serial.begin(9600);
   
+  pinMode(D0, OUTPUT);  //PWM
+  pinMode(D3, OUTPUT);  //Mux A
+  pinMode(D4, OUTPUT);  //Mux B
+  pinMode(D5, OUTPUT);  //Direction
+  pinMode(A0, INPUT);   //Analogue input
+
   //Motor speed reading
   digitalWrite(D3, LOW);
   digitalWrite(D4, LOW);
+
 }
 
 void loop(){
 
   digitalWrite(D5, LOW);  // Motor Forward
   analogWrite(D0, 500);   // you change the speed here
-  calculateSpeed();
-  delay(100);
+  delay(1000);
+  calculateSpeed("Forward");
+  
 
   digitalWrite(D0, LOW);  // Motor Stop
   analogWrite(D5, LOW);
-  calculateSpeed();  
-  delay(100);
+  delay(1000);
+  calculateSpeed("Stop");  
+
 
   digitalWrite(D0, LOW);  // Motor Reverse
   analogWrite(D5, 500);   // you change the speed here
-  calculateSpeed();
-  delay(100);
+  delay(1000);
+  calculateSpeed("Reverse");
+ 
+
+  digitalWrite(D0, LOW);  // Motor Stop
+  analogWrite(D5, LOW);
+  delay(1000);
+  calculateSpeed("Stop");  
 }
 
-void calculateSpeed(){
+void calculateSpeed(String state){
   // read 
   motor_speed = analogRead(A0);
-  delay(200);
+  delay(500);
 
-    //Eliminate analogue input noise
-  if (motor_speed < noise_threshold) {
+  if(motor_speed < noise_threshold){
     motor_speed = 0;
   }
 
   //Calibrate motor speed
   motor_speed = motor_speed * motor_speed_conversion_factor;
+  Serial.print(state);
+  Serial.print(": ");
   Serial.print(motor_speed);
   Serial.println(" RPM");
 }

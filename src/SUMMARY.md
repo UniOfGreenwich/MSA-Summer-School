@@ -5,7 +5,7 @@
 - [Introduction](Introduction/Introduction.md)
 - [Documentation](Documentation/Documentation.md)
 - [Soldering Instructions](Soldering/Soldering_Instructions.md)
-- [ESP8266](ESP8266/Set_Up.md)
+- [ESP8266](ESP8266/ESP8266.md)
     - [ESP8266](ESP8266/Set_Up.md)
     - [Testing Sensors](ESP8266/Testing_Sensors.md)
         - [Temperature](ESP8266/Temperature.md)
