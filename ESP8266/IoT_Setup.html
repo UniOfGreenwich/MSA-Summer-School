@@ -172,7 +172,384 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="iot-setup"><a class="header" href="#iot-setup">IoT Setup</a></h1>
+<p>In this section we are going to put all the functionality together from the previous sections, we will also include the web page provision after this here:</p>
+<ul>
+<li><a href="./Build_WebPage.html">Building the Web Page</a></li>
+</ul>
+<p>We need to include various libraries into this programme, if you have been following along from the previous sections you will should have all the but the following libraries, so make sure you download and install the following libraries to be included in the programme:</p>
+<ul>
+<li>
+<p>All of the following are part of the <a href="https://github.com/esp8266/Arduino/tree/master?tab=readme-ov-file">ESP8266 GitHub Repo</a> that you downloaded as part of the <a href="Set_Up.html">ESP8266 setup</a>:</p>
+<ul>
+<li>
+<p><a href="https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/ESP8266WiFi.h">ESP8266WiFi</a></p>
+</li>
+<li>
+<p><a href="https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WiFi/src/WiFiServer.h">WiFiClient</a></p>
+</li>
+<li>
+<p><a href="https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WebServer/src/ESP8266WebServer.h">ESP8266WebServer</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> You can use the import function within the Arduino software to unzip the folders into <code>/path/to/Arduino/Libraries/</code>, <code>Sketch</code> -&gt; <code>Include Library</code> -&gt; <code>Add</code> .<code>Zip Library...</code>, then navigate to the <code>/path/to/zipped_library</code> to include it.</p>
+</blockquote>
+<h2 id="developing-the-script"><a class="header" href="#developing-the-script">Developing the script</a></h2>
+<ol>
+<li>
+<p>Create a new a script call it something meaningful like, <code>predictive.ino</code></p>
+</li>
+<li>
+<p>Start by adding the standard header information about the script</p>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.0
+* DESCRIPTION: Motor Control web server ESP8266 as Access Point (IP Address is: 192.168.4.1)
+*/
+</code></pre>
+</li>
+<li>
+<p>Using the <code>#include</code> directive reference the wire, Adafruit_MMA845, Adafruit_Sensor libraries:</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<ul>
+<li>If you see <code>...</code> that means that other code is hidden for brevity</li>
+</ul>
+</blockquote>
+<pre><code class="language-cpp">...
 
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;WiFiClient.h&gt;
+#include &lt;ESP8266WebServer.h&gt;
+#include &lt;DHTesp.h&gt;
+#include &lt;Wire.h&gt;
+#include &lt;Adafruit_MMA8451.h&gt;
+#include &lt;Adafruit_Sensor.h&gt;
+#include "index.h"
+</code></pre>
+</li>
+<li>
+<p>Now we need to set the following global variables and define objects that we can use from Classes:</p>
+<pre><code class="language-cpp">...
+
+const float voltage_conversion_factor = 0.004;
+const float temperature_conversion_factor = 17.5;
+const float temperature_offset = 20;
+const float motor_speed_conversion_factor = 24.6;
+const int noise_threshold = 20;
+
+float m_Temp, m_Temp_v, a_Temp, a_Temp_v;
+float h ,t;
+float motor_speed;
+float average_vib, rms_vib, x_axis, y_axis, z_axis;
+String Motor_state = "Stop";
+
+DHTesp dht;
+Adafruit_MMA8451 mma = Adafruit_MMA8451();
+
+//SSID and Password to your ESP Access Point
+const char* ssid = "D1_Mini"; // You should up date this to something unique and clean for your SBC to connect to
+const char* password = "12345678";
+
+ESP8266WebServer server(80);  //Server on port 80
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> There are three new variables/objects created that have not come from the other section you have worked through:</p>
+<ul>
+<li>Firstly, the <code>ssid</code> and <code>password</code> the name and password of our hotspot once it is setup further on in the programme.</li>
+<li>Secondly, the <code>ESP8266WebServer server(80);</code> creates an websever set on port 80.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>We should now modify the <code>setup()</code> function, there are 56 lines of codes and comments (that are very important to the understanding of the code base). Explainations will be provided after the fact that you can look at:</p>
+<pre><code class="language-cpp">...
+
+/**
+* @brief Initialises the system on startup.
+*
+* This function sets up the DHT sensor, initialises serial communication,
+* configures the Wi-Fi settings for the access point, and assigns the handling
+* functions for the web server's root, SBC, and form endpoints. It also
+* initialises the GPIO pins for various components like the motor, multiplexer,
+* and the MMA8451 accelerometer sensor.
+*
+* @param none This function does not take parameters.
+* @return void
+*/
+void setup(void) {
+    dht.setup(D6, DHTesp::DHT22);
+
+    Serial.begin(9600);
+    Serial.println("");
+    
+    //Change IP address to avoid conflicts with other devices.
+    IPAddress ip(192, 168, 0, 12);
+    IPAddress gateway(192, 168, 0, 1);
+    IPAddress subnet(255, 255, 255, 0);
+    
+    WiFi.mode(WIFI_AP);           //Only Access point
+    WiFi.softAP(ssid, password);  //Start HOTspot removing password will disable security
+    WiFi.config(ip, gateway, subnet);
+
+    //IPAddress myIP = WiFi . softAPIP (); //Get IP address
+    Serial.print("HotSpt IP:");
+    Serial.println(ip);
+
+    server.on("/", handleRoot);      //Which routine to handle at root location
+    server.on("/sbc",handleSBC);
+    server.on("/form", handleForm);  //These request sent when we click on button
+    server.begin();                  //Start server
+
+    Serial.println("HTTP server started");
+
+    //Set up ports
+    //D1 and D2 SCL and SCA
+    pinMode(D0, OUTPUT);  //PWM
+    pinMode(D3, OUTPUT);  //Mux A
+    pinMode(D4, OUTPUT);  //Mux B
+    pinMode(D5, OUTPUT);  //Direction
+    pinMode(D6, INPUT);   //Humidity
+    pinMode(A0, INPUT);   //Analogue input
+
+    //Set Mux INH to low and unused mux port to low
+    //Motor in stop state
+    digitalWrite(D5, LOW);
+    analogWrite(D0, 0);
+
+    //begin MMA vibration sensor
+    mma.begin();
+    //Set MMA range
+    mma.setRange(MMA8451_RANGE_2_G);
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<blockquote>
+<ul>
+<li>The body of comments at the top of the function is presented in a standard called Doxygen that is commonly used to produce documentation for code base, you can see an example here -&gt; <a href=""></a></li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<hr />
+<h2 id="full-code-here"><a class="header" href="#full-code-here">Full Code here</a></h2>
+<details>
+<summary>Click here...</summary>
+<pre><code class="language-cpp">/*
+* AUTHORS: YOUR NAMES
+* VERSION: 1.0.0
+* DESCRIPTION: Motor Control web server ESP8266 as Access Point (IP Address is: 192.168.4.1)
+*/
+
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;WiFiClient.h&gt;
+#include &lt;ESP8266WebServer.h&gt;
+#include &lt;DHTesp.h&gt;
+#include &lt;Wire.h&gt;
+#include &lt;Adafruit_MMA8451.h&gt;
+#include &lt;Adafruit_Sensor.h&gt;
+
+const float voltage_conversion_factor = 0.004;
+const float temperature_conversion_factor = 17.5;
+const float temperature_offset = 20;
+const float motor_speed_conversion_factor = 24.6;
+const int noise_threshold = 20;
+
+float m_Temp, m_Temp_v, a_Temp, a_Temp_v;
+float h ,t;
+float motor_speed;
+float average_vib, rms_vib, x_axis, y_axis, z_axis;
+String Motor_state = "Stop";
+
+DHTesp dht;
+Adafruit_MMA8451 mma = Adafruit_MMA8451();
+
+//SSID and Password to your ESP Access Point
+const char* ssid = "D1_Mini"; // You should up date this to something unique and clean for your SBC to connect to
+const char* password = "12345678";
+
+ESP8266WebServer server(80);  //Server on port 80
+
+/**
+ * @brief initialises the system on startup.
+ *
+ * This function sets up the DHT sensor, initialises serial communication,
+ * configures the Wi-Fi settings for the access point, and assigns the handling
+ * functions for the web server's root, SBC, and form endpoints. It also
+ * initialises the GPIO pins for various components like the motor, multiplexer,
+ * and the MMA8451 accelerometer sensor.
+ *
+ * @param none This function does not take parameters.
+ * @return void
+ */
+void setup(void) {
+  dht.setup(D6, DHTesp::DHT22);
+
+  Serial.begin(9600);
+  Serial.println("");
+  
+  //Change IP address to avoid conflicts with other devices.
+  IPAddress ip(192, 168, 0, 12);
+  IPAddress gateway(192, 168, 0, 1);
+  IPAddress subnet(255, 255, 255, 0);
+  
+  WiFi.mode(WIFI_AP);           //Only Access point
+  WiFi.softAP(ssid, password);  //Start HOTspot removing password will disable security
+  WiFi.config(ip, gateway, subnet);
+
+  //IPAddress myIP = WiFi . softAPIP (); //Get IP address
+  Serial.print("HotSpt IP:");
+  Serial.println(ip);
+
+  server.on("/", handleRoot);      //Which routine to handle at root location
+  server.on("/sbc",handleSBC);
+  server.on("/form", handleForm);  //These request sent when we click on button
+  server.begin();                  //Start server
+
+  Serial.println("HTTP server started");
+
+  //Set up ports
+  //D1 and D2 SCL and SCA
+  pinMode(D0, OUTPUT);  //PWM
+  pinMode(D3, OUTPUT);  //Mux A
+  pinMode(D4, OUTPUT);  //Mux B
+  pinMode(D5, OUTPUT);  //Direction
+  pinMode(D6, INPUT);   //Humidity
+  pinMode(A0, INPUT);   //Analogue input
+
+  //Set Mux INH to low and unused mux port to low
+  //Motor in stop state
+  digitalWrite(D5, LOW);
+  analogWrite(D0, 0);
+
+  //begin MMA vibration sensor
+  mma.begin();
+  //Set MMA range
+  mma.setRange(MMA8451_RANGE_2_G);
+}
+
+void loop(void) {
+  server.handleClient();  //Handle client requests
+}
+
+/**
+ * @brief Serves the main page and updates it with sensor readings.
+ *
+ * This function is called when the root URL of the server is accessed. It reads
+ * various sensor data including motor speed, motor temperature, ambient temperature,
+ * humidity, and vibration. The readings are then used to update placeholders in the
+ * HTML page before sending it to the client's web browser.
+ *
+ * @param none Uses global variables and server object to read sensors and send data.
+ * @return void
+ */
+void handleRoot() {
+  String s = MAIN_page;
+
+  //Motor speed reading
+  digitalWrite(D3, LOW);
+  digitalWrite(D4, LOW);
+  motor_speed = analogRead(A0);
+  delay(200);
+
+  //Motor Temp sensor reading
+  digitalWrite(D3, HIGH);
+  digitalWrite(D4, LOW);
+  m_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+  m_Temp_v = m_Temp * voltage_conversion_factor;
+  m_Temp = ((temperature_conversion_factor * m_Temp_v) - temperature_offset);
+  Serial.println(m_Temp);
+  delay(200);
+
+  //Amb Temp sensor reading
+  digitalWrite(D3, LOW);
+  digitalWrite(D4, HIGH);
+  a_Temp = analogRead(A0);  //Read Analog Voltage of ADC Pin
+  a_Temp_v = a_Temp * voltage_conversion_factor;
+  a_Temp = (temperature_conversion_factor * a_Temp_v) - temperature_offset;
+  Serial.println(a_Temp);
+  delay(200);
+
+  //Eliminate analogue input noise
+  if (motor_speed &lt; noise_threshold) {
+    motor_speed = 0;
+  }
+
+  //Calibrate motor speed
+  motor_speed = motor_speed * motor_speed_conversion_factor;
+  Serial.println(motor_speed);
+
+  //Humidity sensor reading
+  h = dht.getHumidity();
+  t = dht.getTemperature();
+  Serial.println(h);
+  Serial.println(t);
+  delay(200);
+
+  //Accelerometer
+  sensors_event_t event;
+  mma.getEvent(&amp;event);
+  x_axis = event.acceleration.x;
+  y_axis = event.acceleration.y;
+  z_axis = event.acceleration.z;
+  average_vib = ((sq(x_axis)) + (sq(y_axis)) + (sq(z_axis))) / 3;
+  rms_vib = sqrt(average_vib);
+  Serial.println(rms_vib);
+  delay(200);
+
+  //Convert variables to String then Replace @@temp@@ in HTML with temperaure value
+  s.replace("@@m_temp@@", String(m_Temp));
+  s.replace("@@a_temp@@", String(a_Temp));
+  s.replace("@@humidity@@", String(h));
+  s.replace("@@motor_temp@@", String(t));
+  s.replace("@@motor_speed@@", String(motor_speed));
+  s.replace("@@status@@", Motor_state);
+  s.replace("@@vibration@@", String(rms_vib));
+  server.send(200, "text/html", s);  //Send webpage to browser
+
+}
+
+/**
+ * @brief Handles the form submission from the web interface.
+ *
+ * This function is called when the user submits a form on the web interface.
+ * It reads the state of the button from the form data and controls the motor
+ * accordingly. After setting the motor state, it redirects the web browser
+ * back to the root location.
+ *
+ * @param none Uses global server object to access form data.
+ * @return void
+ */
+void handleForm() {
+  String m_state = server.arg("button");  //Get button state
+
+  if (m_state == "Forward") {
+    digitalWrite(D5, LOW);  //Motor Forward
+    analogWrite(D0, 500);
+    Motor_state = "Forward";
+  }
+  if (m_state == "Stop") {
+    digitalWrite(D0, LOW);  //Motor Stop
+    analogWrite(D5, LOW);
+    Motor_state = "Stop";
+  }
+  if (m_state == "Reverse") {
+    digitalWrite(D0, LOW);  //Motor Reverse
+    analogWrite(D5, 500);
+    Motor_state = "Reverse";
+  }
+
+  server.sendHeader("Location", "/");  //Send web browser to root location
+  server.send(302, "text/html", "");   //Send browser 302 redirect go back to root location
+  delay(500);                          //Delay to let motor get up to speed
+}
+
+</code></pre>
+</detials>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
