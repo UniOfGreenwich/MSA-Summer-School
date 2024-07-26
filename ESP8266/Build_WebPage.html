@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">2.</strong> Documentation</a></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">3.</strong> Soldering Instructions</a></li><li class="chapter-item expanded "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.1.</strong> ESP8266</a></li><li class="chapter-item "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">4.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Temperature.html"><strong aria-hidden="true">4.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="../ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">4.2.2.</strong> Photo Interrupter</a></li><li class="chapter-item "><a href="../ESP8266/Accelerometer.html"><strong aria-hidden="true">4.2.3.</strong> Accelerometer</a></li></ol></li><li class="chapter-item expanded "><a href="../ESP8266/Build_WebPage.html" class="active"><strong aria-hidden="true">4.3.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">4.4.</strong> IoT Setup</a></li></ol></li><li class="chapter-item "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">5.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">5.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">5.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">5.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">5.4.</strong> Python Script</a></li><li class="chapter-item "><a href="../Debian_Rock/WireShark.html"><strong aria-hidden="true">5.5.</strong> WireShark</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">2.</strong> Documentation</a></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">3.</strong> Soldering Instructions</a></li><li class="chapter-item expanded "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">4.1.</strong> ESP8266</a></li><li class="chapter-item "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">4.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Temperature.html"><strong aria-hidden="true">4.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="../ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">4.2.2.</strong> Photo Interrupter</a></li><li class="chapter-item "><a href="../ESP8266/Accelerometer.html"><strong aria-hidden="true">4.2.3.</strong> Accelerometer</a></li></ol></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">4.3.</strong> IoT Setup</a></li><li class="chapter-item expanded "><a href="../ESP8266/Build_WebPage.html" class="active"><strong aria-hidden="true">4.4.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/Upload_Running.html"><strong aria-hidden="true">4.5.</strong> Upload and Running</a></li></ol></li><li class="chapter-item "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">5.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">5.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">5.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">5.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">5.4.</strong> Python Script</a></li><li class="chapter-item "><a href="../Debian_Rock/WireShark.html"><strong aria-hidden="true">5.5.</strong> WireShark</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -309,54 +309,34 @@
         &lt;div class="container"&gt;
             &lt;div class="header"&gt;Motor Control Dashboard&lt;/div&gt;
             &lt;div class="status"&gt;Motor state: &lt;span id="motorState"&gt;@@status@@&lt;/span&gt;&lt;/div&gt;
-                &lt;div class="buttons"&gt;
-                &lt;button class="button" onclick="sendCommand('Forward')"&gt;Forward&lt;/button&gt;
-                &lt;button class="button" onclick="sendCommand('Stop')"&gt;Stop&lt;/button&gt;
-                &lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;
-            &lt;/div&gt;
+                &lt;form method ="get" action= "/form" class="buttons"&gt;
+                &lt;input type=submit name="button" value="Forward" class=button&gt;
+                &lt;input type=submit name="button" value="Stop" class=button&gt;
+                &lt;input type=submit name="button" value="Reverse" class=button&gt;
+                &lt;/form&gt;
 </code></pre>
-<blockquote>
-<p><strong>Explanation:</strong></p>
-<blockquote>
-<ul>
-<li><code>&lt;div class="status"&gt;Motor state: &lt;span id="motorState"&gt;@@status@@&lt;/span&gt;&lt;/div&gt;</code>: Displays the current motor state, with <code>@@status@@</code> as a placeholder for dynamic content.</li>
-<li><code>&lt;div class="buttons"&gt;</code>: Defines the buttons class
-<ul>
-<li>
-<p><code>&lt;button class="button" onclick="sendCommand('Forward')"&gt;Forward&lt;/button&gt;</code>: Creates a submit button for "Forward" with specified dimensions.</p>
-</li>
-<li>
-<p><code>&lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;</code>: Creates a submit button for "Stop" with specified dimensions.</p>
-</li>
-<li>
-<p><code>&lt;button class="button" onclick="sendCommand('Reverse')"&gt;Reverse&lt;/button&gt;</code>: Creates a submit button for "Reverse" with specified dimensions.</p>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</blockquote>
 <h3 id="step-42-add-sensor-data-display"><a class="header" href="#step-42-add-sensor-data-display">Step 4.2: Add Sensor Data Display</a></h3>
 <pre><code class="language-html">...
-    &lt;&lt;div class="sensor"&gt;
-        &lt;h1&gt;Motor Temperature&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="motorTemp"&gt;@@m_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+            &lt;div class="sensor"&gt;
+                &lt;h1&gt;Motor Temperature&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="motorTemp"&gt;@@m_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-        &lt;h1&gt;Ambient Temperature&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="ambientTemp"&gt;@@a_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+                &lt;h1&gt;Ambient Temperature&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="ambientTemp"&gt;@@a_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-        &lt;h1&gt;Humidity&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="humidity"&gt;@@humidity@@ &amp;percnt;&lt;/span&gt;&lt;/h2&gt;
+                &lt;h1&gt;Humidity&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="humidity"&gt;@@humidity@@ &amp;percnt;&lt;/span&gt;&lt;/h2&gt;
 
-        &lt;h1&gt;Enclosure Temperature&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="enclosureTemp"&gt;@@motor_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
+                &lt;h1&gt;Enclosure Temperature&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="enclosureTemp"&gt;@@motor_temp@@  &amp;deg;C&lt;/span&gt;&lt;/h2&gt;
 
-        &lt;h1&gt;Motor Speed&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="motorSpeed"&gt;@@motor_speed@@ RPM&lt;/span&gt;&lt;/h2&gt;
+                &lt;h1&gt;Motor Speed&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="motorSpeed"&gt;@@motor_speed@@ RPM&lt;/span&gt;&lt;/h2&gt;
 
-        &lt;h1&gt;Average Vibration&lt;/h1&gt;
-        &lt;h2&gt;&lt;span id="vibration"&gt;@@vibration@@ g&lt;/span&gt;&lt;/h2&gt;
-    &lt;/div&gt;
+                &lt;h1&gt;Average Vibration&lt;/h1&gt;
+                &lt;h2&gt;&lt;span id="vibration"&gt;@@vibration@@ g&lt;/span&gt;&lt;/h2&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
     &lt;/body&gt;
 </code></pre>
 <h2 id="step-5-end-the-html-document"><a class="header" href="#step-5-end-the-html-document">Step 5: End the HTML Document</a></h2>
@@ -385,7 +365,7 @@
 #include &lt;Adafruit_Sensor.h&gt;
 #include "index.h" // &lt; - wedpage here
 </code></pre>
-<p>Now you completed that, continue with the next section here -&gt; <a href="./IoT_Setup.html">IoT Setup</a></p>
+<p>Now you completed that, continue with the next section here -&gt; <a href="./Upload_Running.html">Uploading and Running </a></p>
 <details>
 <summary>Full Code here... </summary>
 <pre><code class="language-html">const char MAIN_page[]PROGMEM=R"=====(
@@ -493,11 +473,11 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../ESP8266/Accelerometer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ESP8266/IoT_Setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../ESP8266/IoT_Setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../ESP8266/Upload_Running.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -507,11 +487,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../ESP8266/Accelerometer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ESP8266/IoT_Setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../ESP8266/IoT_Setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../ESP8266/Upload_Running.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
