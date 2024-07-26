@@ -337,17 +337,18 @@ The output should look like:
 >
 ```
 
-If you open another terminal, <kbd>ctrl</kbd>+<kbd>t</kbd>, you can look in the content of the `data.log` file: 
+If you open another terminal, <kbd>ctrl</kbd>+<kbd>t</kbd>, you can look in the content of the `data.csv` file: 
 
 ```sh
-$ tail -f predictiveMaintenance/data.log
+$ tail -f predictiveMaintenance/data.csv
 ```
 
 or 
 
 ```sh
-$ less +G predictiveMaintenance/data.log
+$ less +G predictiveMaintenance/data.csv
 ```
+You can download some example data captured before: [data.csv](../../predictiveMaintenance/data.csv)
 
 The output these commands should look something like this, and everytime there is a change you get an additionally line with the latest data. 
 

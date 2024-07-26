@@ -128,47 +128,37 @@ Create the body section with forms and data placeholders.
         <div class="container">
             <div class="header">Motor Control Dashboard</div>
             <div class="status">Motor state: <span id="motorState">@@status@@</span></div>
-                <div class="buttons">
-                <button class="button" onclick="sendCommand('Forward')">Forward</button>
-                <button class="button" onclick="sendCommand('Stop')">Stop</button>
-                <button class="button" onclick="sendCommand('Reverse')">Reverse</button>
-            </div>
+                <form method ="get" action= "/form" class="buttons">
+                <input type=submit name="button" value="Forward" class=button>
+                <input type=submit name="button" value="Stop" class=button>
+                <input type=submit name="button" value="Reverse" class=button>
+                </form>
 ```
-
-> **Explanation:**
->> - `<div class="status">Motor state: <span id="motorState">@@status@@</span></div>`: Displays the current motor state, with `@@status@@` as a placeholder for dynamic content.
->> - `<div class="buttons">`: Defines the buttons class
->>    - `<button class="button" onclick="sendCommand('Forward')">Forward</button>`: Creates a submit button for "Forward" with specified dimensions.
->>
->>    - `<button class="button" onclick="sendCommand('Reverse')">Reverse</button>`: Creates a submit button for "Stop" with specified dimensions.
->>
->>    - `<button class="button" onclick="sendCommand('Reverse')">Reverse</button>`: Creates a submit button for "Reverse" with specified dimensions.
-
-
 
 ### Step 4.2: Add Sensor Data Display
 
 ```html
 ...
-    <<div class="sensor">
-        <h1>Motor Temperature</h1>
-        <h2><span id="motorTemp">@@m_temp@@  &deg;C</span></h2>
+            <div class="sensor">
+                <h1>Motor Temperature</h1>
+                <h2><span id="motorTemp">@@m_temp@@  &deg;C</span></h2>
 
-        <h1>Ambient Temperature</h1>
-        <h2><span id="ambientTemp">@@a_temp@@  &deg;C</span></h2>
+                <h1>Ambient Temperature</h1>
+                <h2><span id="ambientTemp">@@a_temp@@  &deg;C</span></h2>
 
-        <h1>Humidity</h1>
-        <h2><span id="humidity">@@humidity@@ &percnt;</span></h2>
+                <h1>Humidity</h1>
+                <h2><span id="humidity">@@humidity@@ &percnt;</span></h2>
 
-        <h1>Enclosure Temperature</h1>
-        <h2><span id="enclosureTemp">@@motor_temp@@  &deg;C</span></h2>
+                <h1>Enclosure Temperature</h1>
+                <h2><span id="enclosureTemp">@@motor_temp@@  &deg;C</span></h2>
 
-        <h1>Motor Speed</h1>
-        <h2><span id="motorSpeed">@@motor_speed@@ RPM</span></h2>
+                <h1>Motor Speed</h1>
+                <h2><span id="motorSpeed">@@motor_speed@@ RPM</span></h2>
 
-        <h1>Average Vibration</h1>
-        <h2><span id="vibration">@@vibration@@ g</span></h2>
-    </div>
+                <h1>Average Vibration</h1>
+                <h2><span id="vibration">@@vibration@@ g</span></h2>
+            </div>
+        </div>
     </body>
 ```
 
@@ -201,7 +191,7 @@ At the top of your Predictive.ino, where you have your include directives add th
 #include "index.h" // < - wedpage here
 ```
 
-Now you completed that, continue with the next section here -> [IoT Setup](./IoT_Setup.md)
+Now you completed that, continue with the next section here -> [Uploading and Running ](./Upload_Running.md)
 
 
 <details>

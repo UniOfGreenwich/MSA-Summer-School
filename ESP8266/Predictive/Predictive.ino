@@ -45,6 +45,70 @@ const char* password = "12345678";
 ESP8266WebServer server(80);  //Server on port 80
 
 /**
+* @brief Initializes the system on startup.
+*
+* This function sets up the DHT sensor, initializes serial communication,
+* configures the Wi-Fi settings for the access point, and assigns the handling
+* functions for the web server's root, SBC, and form endpoints. It also
+* initializes the GPIO pins for various components like the motor, multiplexer,
+* and the MMA8451 accelerometer sensor.
+*
+* @param none This function does not take parameters.
+* @return void
+*/
+void setup(void) {
+  dht.setup(D6, DHTesp::DHT22);
+
+  Serial.begin(9600);
+  Serial.println("");
+  
+  // I am need to check if this is really needed, as the default settings are 192.168.4.1/24, the below is never used.
+  //Change IP address to avoid conflicts with other devices.
+  IPAddress ip(192, 168, 0, 12);
+  IPAddress gateway(192, 168, 0, 1);
+  IPAddress subnet(255, 255, 255, 0);
+  //IPAddress dns(192, 168, 0, 1);
+
+  WiFi.mode(WIFI_AP);           //Only Access point
+  WiFi.softAP(ssid, password);  //Start HOTspot removing password will disable security
+  WiFi.config(ip, gateway, subnet); // if the default is always used, do we need this?
+
+  //IPAddress myIP = WiFi . softAPIP (); //Get IP address
+  Serial.print("HotSpt IP:");
+  Serial.println(ip);
+
+  server.on("/", handleRoot);      //Which routine to handle at root location
+  server.on("/sbc",handleSBC);
+  server.on("/form", handleForm);  //These request sent when we click on button
+  server.begin();                  //Start server
+
+  Serial.println("HTTP server started");
+
+  //Set up ports
+  //D1 and D2 SCL and SCA
+  pinMode(D0, OUTPUT);  //PWM
+  pinMode(D3, OUTPUT);  //Mux A
+  pinMode(D4, OUTPUT);  //Mux B
+  pinMode(D5, OUTPUT);  //Direction
+  pinMode(D6, INPUT);   //Humidity
+  pinMode(A0, INPUT);   //Analogue input
+
+  //Set Mux INH to low and unused mux port to low
+  //Motor in stop state
+  digitalWrite(D5, LOW);
+  analogWrite(D0, 0);
+
+  //begin MMA vibration sensor
+  mma.begin();
+  //Set MMA range
+  mma.setRange(MMA8451_RANGE_2_G);
+}
+
+void loop(void) {
+  server.handleClient();  //Handle client requests
+}
+
+/**
  * @brief Serves the main page and updates it with sensor readings.
  *
  * This function is called when the root URL of the server is accessed. It reads
@@ -121,22 +185,6 @@ void handleRoot() {
 
 }
 
-/**
- * @brief Sends sensor data to a Single Board Computer (SBC).
- *
- * This function compiles various sensor readings into a comma-separated string
- * and sends it to a connected SBC. The data includes motor temperature, ambient
- * temperature, humidity, temperature, motor speed, motor state, and vibration
- * readings along the x, y, and z axes.
- *
- * @param none Uses global variables to compile data.
- * @return void
- */
-void handleSBC(){
-  String dataForSBC = String(m_Temp)+ ","+ String(a_Temp)+ ","+ String(h)+ ","+ String(t)+ ","+ String(motor_speed)+ ","+ String(Motor_state)+ ","+ String(x_axis)+ ","+ String(y_axis)+ ","+ String(z_axis)+ ","+ String(rms_vib);
-  server.send(200, "/text/plain", dataForSBC);  // Send data to SBC
-}
-
 
 /**
  * @brief Handles the form submission from the web interface.
@@ -174,66 +222,17 @@ void handleForm() {
 }
 
 /**
- * @brief Initializes the system on startup.
+ * @brief Sends sensor data to a Single Board Computer (SBC).
  *
- * This function sets up the DHT sensor, initializes serial communication,
- * configures the Wi-Fi settings for the access point, and assigns the handling
- * functions for the web server's root, SBC, and form endpoints. It also
- * initializes the GPIO pins for various components like the motor, multiplexer,
- * and the MMA8451 accelerometer sensor.
+ * This function compiles various sensor readings into a comma-separated string
+ * and sends it to a connected SBC. The data includes motor temperature, ambient
+ * temperature, humidity, temperature, motor speed, motor state, and vibration
+ * readings along the x, y, and z axes.
  *
- * @param none This function does not take parameters.
+ * @param none Uses global variables to compile data.
  * @return void
  */
-void setup(void) {
-  dht.setup(D6, DHTesp::DHT22);
-
-  Serial.begin(9600);
-  Serial.println("");
-  
-  //Change IP address to avoid conflicts with other devices.
-  IPAddress ip(192, 168, 0, 12);
-  IPAddress gateway(192, 168, 0, 1);
-  IPAddress subnet(255, 255, 255, 0);
-  //IPAddress dns(192, 168, 0, 1);
-
-  WiFi.mode(WIFI_AP);           //Only Access point
-  WiFi.softAP(ssid, password);  //Start HOTspot removing password will disable security
-  WiFi.config(ip, gateway, subnet);
-
-
-  //IPAddress myIP = WiFi . softAPIP (); //Get IP address
-  Serial.print("HotSpt IP:");
-  Serial.println(ip);
-
-  server.on("/", handleRoot);      //Which routine to handle at root location
-  server.on("/sbc",handleSBC);
-  server.on("/form", handleForm);  //These request sent when we click on button
-  server.begin();                  //Start server
-
-  Serial.println("HTTP server started");
-
-  //Set up ports
-  //D1 and D2 SCL and SCA
-  pinMode(D0, OUTPUT);  //PWM
-  pinMode(D3, OUTPUT);  //Mux A
-  pinMode(D4, OUTPUT);  //Mux B
-  pinMode(D5, OUTPUT);  //Direction
-  pinMode(D6, INPUT);   //Humidity
-  pinMode(A0, INPUT);   //Analogue input
-
-  //Set Mux INH to low and unused mux port to low
-  //Motor in stop state
-  digitalWrite(D5, LOW);
-  analogWrite(D0, 0);
-
-  //begin MMA vibration sensor
-  mma.begin();
-  //Set MMA range
-  mma.setRange(MMA8451_RANGE_2_G);
-}
-
-
-void loop(void) {
-  server.handleClient();  //Handle client requests
+void handleSBC(){
+  String dataForSBC = String(m_Temp)+ ","+ String(a_Temp)+ ","+ String(h)+ ","+ String(t)+ ","+ String(motor_speed)+ ","+ String(Motor_state)+ ","+ String(x_axis)+ ","+ String(y_axis)+ ","+ String(z_axis)+ ","+ String(rms_vib);
+  server.send(200, "/text/plain", dataForSBC);  // Send data to SBC
 }

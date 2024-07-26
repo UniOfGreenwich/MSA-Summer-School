@@ -25,6 +25,7 @@ Luckily you can click these links below to download the zips that needed to be a
 - [Wire]()
 - [Adafruit_MMA8451](https://github.com/adafruit/Adafruit_MMA8451_Library/archive/refs/heads/master.zip)
 - [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor/archive/refs/heads/master.zip)
+- [Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO/archive/refs/heads/master.zip) (needed for the Adafruit_I2CDevice.h dependency required by MMA8451) 
 
 Once downloaded, you can use the import function within the Arduino software to unzip the folders into `/path/to/Arduino/Libraries/`, `Sketch` -> `Include Library` -> `Add .Zip Library...`, then navigate to the `/path/to/zipped_library` to include it.
 

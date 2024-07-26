@@ -23,28 +23,28 @@ Similarly to the [Internet setup](../Internet/Internet.md), we need to connect t
     * Reproduce the following configuration, it is important you have no spelling or syntax errors. 
 
         ```
-    [connection]
-    id=NAME_FOR_YOUR_CONNECTION
-    type=wifi
-    permissions=
+        [connection]
+        id=NAME_FOR_YOUR_CONNECTION
+        type=wifi
+        permissions=
 
-    [wifi]
-    mac-address-blacklist=
-    mode=infrastructure
-    ssid=YOUR_ESP8266_AP_SSID
+        [wifi]
+        mac-address-blacklist=
+        mode=infrastructure
+        ssid=YOUR_ESP8266_AP_SSID
 
-    [wifi-security]
-    key-mgmt=wpa-psk
-    psk=YOUR_ESPE8226_SSID_PASSWORD
+        [wifi-security]
+        key-mgmt=wpa-psk
+        psk=YOUR_ESPE8226_SSID_PASSWORD
 
-    [ipv4]
-    dns-search=
-    method=auto
+        [ipv4]
+        dns-search=
+        method=auto
 
-    [ipv6]
-    addr-gen-mode=stable-privacy
-    dns-search=
-    method=auto
+        [ipv6]
+        addr-gen-mode=stable-privacy
+        dns-search=
+        method=auto
         ```
 
     </details>
