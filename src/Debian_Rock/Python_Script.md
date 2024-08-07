@@ -78,7 +78,7 @@ import time
 ```
 
 > **Explanation:**
->> - `...` indicates to you, that there is more code above but it is not shown for brevity, do not write `...`
+>> - `...` indicates to you, that there is more code above but it is not shown for brevity, do **not** write `...`
 >> - `requests` : Allows you to send HTTP requests.
 >> - `csv` : Provides functionality to read from and write to CSV files.
 >> - `os` : Provides a way of interacting with the operating system.
@@ -351,6 +351,8 @@ $ less +G predictiveMaintenance/data.csv
 You can download some example data captured before: [data.csv](../../predictiveMaintenance/data.csv)
 
 The output these commands should look something like this, and everytime there is a change you get an additionally line with the latest data. 
+
+You can download some example data captured before: [data.csv](./data.csv)
 
 ![](./figures/dataout.png)
 

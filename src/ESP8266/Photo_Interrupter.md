@@ -125,6 +125,10 @@ In order to understand the this component it is important to review the supporti
 
   ![](./figures/motor_speed_serial.png)
 
+8.  Try experimenting with the motor speed via the `anologWrite()` function: 
+    - `analogWrite(D5, 500);`, where 500 is the DAC value that will map to 1.7v 
+      - 0v - 3.2v map to 0 to 1024 DAC value
+
 -------------------------------
 
 ## Full code below

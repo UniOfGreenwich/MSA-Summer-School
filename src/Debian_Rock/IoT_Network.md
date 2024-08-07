@@ -10,14 +10,14 @@ Similarly to the [Internet setup](../Internet/Internet.md), we need to connect t
     <details>
     <summary>Create the config file manually</summary>
 
-    * Elevate your self to root and create the file that will serve as configuration file to connect to YOUR ESP8266 access point (AP). Remember to get the name of your AP from your ESP8266 .ino file.
+    * Elevate your self to root and create the file that will serve as configuration file to connect to **YOUR** ESP8266 access point (AP). Remember to get the name of your AP from your ESP8266 `.ino` file.
 
         ```sh
         sudo nano /etc/NetworkManager/system-connections/YOURESP8266APSSID.nmconnection
         ```
 
         > **Note**
-        >> For example my ESP8266 AP is predicitveEP8266, so I woul replace `YOURESP8266APSSID.nmconnection` with `predicitveEP8266.nmconnection`
+        >> For example my ESP8266 AP is `predicitveEP8266`, so I would replace `YOURESP8266APSSID.nmconnection` with `predicitveEP8266.nmconnection`
 
 
     * Reproduce the following configuration, it is important you have no spelling or syntax errors. 
