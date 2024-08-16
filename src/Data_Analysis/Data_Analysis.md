@@ -53,7 +53,29 @@
     $ source DataAnalysisEnv/bin/activate
     $ jupyter notebook &
     ```
+- either way you should see the following output in the terminal:
+  
+  ![](./figures/jupyter-terminal.png)
 
-2. Should auto launch chrome and you will be greeted with the following page
+2. Should auto launch chrome and you will be greeted with the following page:
 
->Note: if not you can go to the browser URL and type the address shown in the terminal
+    ![](./figures/jupyter_auto.png)
+
+    >**Note:**
+    >> - If not you can go to the browser URL and type the address shown in the terminal
+    >> - Locate the line `To access the server, open this in a a browser:`
+    >>
+    >>   - `file:///home/rock/.local/share/jupyter/runtime/jpserver-6197-open.html`
+    >>   - Also, `/jpserver-####-open.html` will be unique to you.
+
+3. A default notebook is present called `Untitled1.ipynb`, double clicking it should launch the folllwing: 
+
+    ![](./figures/jupyter_example.png)
+
+4. You can check the running kernel by going back to the orginal host tab and clikcing `Running` to confirm the `Python 3 (ipykernel)` is running like below:
+
+    ![](./figures/jupyter_kernel.png)
+
+5. You can shutdown the jupyter notebook from File and Shutdown, if successful the terminal will display:
+
+    ![](./figures/jupyter_shutdown_terminal.png)
