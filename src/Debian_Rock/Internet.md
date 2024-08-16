@@ -45,7 +45,7 @@ The Debain OS for the Rock C4+ uses the `NetworkManager` package to manage all c
 
     [wifi-security]
     auth-alg=open
-    key-mmgt=wpa-eap
+    key-mgmt=wpa-eap
 
     [802-1x]
     anonymous-identity=username@gre.ac.uk

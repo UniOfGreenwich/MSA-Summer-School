@@ -21,4 +21,5 @@
      - [Python Script](Debian_Rock/Python_Script.md)
      - [WireShark](Debian_Rock/WireShark.md)
 - [Security IoT](Security_IoT/Security_IoT.md)
+  - [Case Study](Security_IoT/Case_Study.md)
 - [Data Analysis](Data_Analysis/Data_Analysis.md)
