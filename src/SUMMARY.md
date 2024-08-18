@@ -6,7 +6,7 @@
 - [Documentation](Documentation/Documentation.md)
 - [Soldering Instructions](Soldering/Soldering_Instructions.md)
 - [Circuit Design and Simulation](CDSim/CDSim.md) 
-  - [OpAmps](CDSim/OPAmps.md) 
+  - [OpAmps](CDSim/OpAmps.md) 
   - [MOSFETS](CDSim/MOSFETS.md)
   - [Filters](CDSim/Filters.md) 
 - [ESP8266](ESP8266/ESP8266.md)
