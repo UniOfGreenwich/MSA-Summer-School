@@ -197,7 +197,7 @@
 <p>Obviously, the Earliest Start date of Task A is day 1. Since the task has a duration of two days the earliest this task can be completed is on day 2, if we appreciate that work will be carried out on days 1 and 2.</p>
 <p>The Early finish can be defined as:</p>
 <div align=center>
-<p>EF = (D + ES) + 1                                       Equation. 1</p>
+<p>EF = (D + ES) - 1                                       Equation. 1</p>
 </div>
 <p>where D is the task duration and ES is the earliest start date of the task.</p>
 <p>Task B must have an Earliest Start date of day 3, the day after the EF date of Task A. Using equation 1, the EF
@@ -205,7 +205,7 @@ date of Task B can be found calculated as 7.</p>
 <p>So the earliest finish day for Task B is day 7. The EF day of task C, D, and E can be found in the same way. On reaching Task F a decision needs to be made on what is the earliest start date of this task. Clearly Task F can only  start once both Tasks C and E are complete which implies that Task F must start on day 11. The earliest finish date of Task F is therefore day 13. The project will therefore take 13 days to complete, assuming no delays, and  the critical path consist of Tasks A, B, C and F, which is the longest path through the project block diagram. Any delay in completing these tasks will result in the project being delivered late.</p>
 <p>A backwards pass is now carried out in order to complete the lower cells in each project block. Clearly the Late Start and Late Finish times of Task F must be the same as the Early Start and Early Finish times. Working backwords from Task F, the Late Finish times of both Tasks C and E must be day 10. The Late Start times can be determined using equation 2:</p>
 <div align=center>
-<p>LS = (LF− D)+ 1                                         Equation. 2</p>
+<p>LS = (LF− D) + 1                                         Equation. 2</p>
 </div>
 <p>where LS is the latest start time, LF is the latest finish time and D are the duration of the task.</p>
 <p>So using equation 2, the latest that Task C can start is day 8 and the latest that Task E can start is day 9 in order  to deliver the project on time. The Late start times of Tasks B and D can be determined in the same way. At Task A, the question arises as to what the Latest Finish date for this Task is. Clearly to meet the late start time of Task B it must finish on day 2 so Task A takes the lower value of Task B and D’s Late Start time in order to determine its Late Finish time. Fig. 3 presents the completed forward and backwards pass project flow diagram.</p>
