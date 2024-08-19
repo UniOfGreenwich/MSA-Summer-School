@@ -3,12 +3,15 @@
 ------------------------------------------------------
 # Main
 - [Introduction](Introduction/Introduction.md)
+- [Project Overview](./ProjOverview/ProjOverview.md)
+- [Project Management](./ProjMgmt/ProjMmgt.md)
+- [Critcial Path](./CriticalPath/CriticalPath.md)
 - [Documentation](Documentation/Documentation.md)
-- [Soldering Instructions](Soldering/Soldering_Instructions.md)
 - [Circuit Design and Simulation](CDSim/CDSim.md) 
   - [OpAmps](CDSim/OpAmps.md) 
   - [MOSFETS](CDSim/MOSFETS.md)
   - [Filters](CDSim/Filters.md) 
+- [Soldering Instructions](Soldering/Soldering_Instructions.md)
 - [ESP8266](ESP8266/ESP8266.md)
     - [ESP8266](ESP8266/Set_Up.md)
     - [Testing Sensors](ESP8266/Testing_Sensors.md)
