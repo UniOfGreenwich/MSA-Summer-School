@@ -28,10 +28,18 @@ Here is an external video on how to make a critical path in Proteus -> [https://
 
 Here is an external video on how to make Footprint path in Proteus -> [https://www.youtube.com/watch?v=dU53Pvil-Bs](https://www.youtube.com/watch?v=dU53Pvil-Bs)
 
+## Circuit Test
+
+You can find the proteus schematic here [virtual terminal_1](./virtual%20terminal_1.pdsprj): 
+
+>SHA256Sum:
+>> - virtual terminal_1.pdsprj
+>>      - 572d9c8b4a52e9e021e5dfe4659d0e0cf61f7ebcaf3cc9e2ffdf41c74fcef2c3
+
 
 ## Final Design 
 
-You can download the final design for the [Predicitive Maintenance board here]() when instructed to do so, it contains the following:
+You can download the final design for the [Predicitive Maintenance board here](./Schematics_Final_PM_design.zip) when instructed to do so, it contains the following:
 
  - jack_plug.pdsprj 
  - Parts List.docx
