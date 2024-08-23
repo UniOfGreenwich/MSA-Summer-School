@@ -38,7 +38,13 @@
 
 ## Jupyter Notebook
 
-1. We will be using Jupyter Notebook to:
+>**IMPORTANT:**
+>> Copy the `DataAnalysis.ipynb` to the the `~/DataAnalysis` directory
+>>
+>>- `$ cp ~/.MSA/src/Data_Analysis/DataAnalysis.ipynb ~/DataAnalysis`  
+
+
+1. We will be using Jupyter Notebook to analyses the data from the IoT Predictvice Maintenance system:
 
 - Use the pre-made alias: 
     
@@ -53,6 +59,7 @@
     $ source DataAnalysisEnv/bin/activate
     $ jupyter notebook &
     ```
+
 - either way you should see the following output in the terminal:
   
   ![](./figures/jupyter-terminal.png)

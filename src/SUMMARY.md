@@ -3,6 +3,7 @@
 ------------------------------------------------------
 # Main
 - [Introduction](Introduction/Introduction.md)
+- [Self Study](SelfStudy/SelfStudy.md)
 - [Project Overview](./ProjOverview/ProjOverview.md)
 - [Project Management](./ProjMgmt/ProjMmgt.md)
 - [Critcial Path](./CriticalPath/CriticalPath.md)
