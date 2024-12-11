@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -28,18 +28,25 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././theme/pagetoc.css">
+        <link rel="stylesheet" href=".././theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href=".././theme/css/code.css">
+        <link rel="stylesheet" href=".././theme/css/terminal.css">
+        <link rel="stylesheet" href=".././theme/css/output.css">
 
         <!-- MathJax -->
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -61,19 +68,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -83,45 +87,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item "><a href="../Introduction/Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="../SelfStudy/SelfStudy.html"><strong aria-hidden="true">2.</strong> Self Study</a></li><li class="chapter-item "><a href="../ProjOverview/ProjOverview.html"><strong aria-hidden="true">3.</strong> Project Overview</a></li><li class="chapter-item "><a href="../ProjMgmt/ProjMmgt.html"><strong aria-hidden="true">4.</strong> Project Management</a></li><li class="chapter-item "><a href="../CriticalPath/CriticalPath.html"><strong aria-hidden="true">5.</strong> Critcial Path</a></li><li class="chapter-item "><a href="../Documentation/Documentation.html"><strong aria-hidden="true">6.</strong> Documentation</a></li><li class="chapter-item "><a href="../CDSim/CDSim.html"><strong aria-hidden="true">7.</strong> Circuit Design and Simulation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../CDSim/OpAmps.html"><strong aria-hidden="true">7.1.</strong> OpAmps</a></li><li class="chapter-item "><a href="../CDSim/MOSFETS.html"><strong aria-hidden="true">7.2.</strong> MOSFETS</a></li><li class="chapter-item "><a href="../CDSim/Filters.html"><strong aria-hidden="true">7.3.</strong> Filters</a></li></ol></li><li class="chapter-item "><a href="../Soldering/Soldering_Instructions.html"><strong aria-hidden="true">8.</strong> Soldering Instructions</a></li><li class="chapter-item expanded "><a href="../ESP8266/ESP8266.html"><strong aria-hidden="true">9.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Set_Up.html"><strong aria-hidden="true">9.1.</strong> ESP8266</a></li><li class="chapter-item expanded "><a href="../ESP8266/Testing_Sensors.html"><strong aria-hidden="true">9.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ESP8266/Temperature.html"><strong aria-hidden="true">9.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="../ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">9.2.2.</strong> Photo Interrupter</a></li><li class="chapter-item expanded "><a href="../ESP8266/Accelerometer.html" class="active"><strong aria-hidden="true">9.2.3.</strong> Accelerometer</a></li></ol></li><li class="chapter-item "><a href="../ESP8266/IoT_Setup.html"><strong aria-hidden="true">9.3.</strong> IoT Setup</a></li><li class="chapter-item "><a href="../ESP8266/Build_WebPage.html"><strong aria-hidden="true">9.4.</strong> Build Webpage</a></li><li class="chapter-item "><a href="../ESP8266/Upload_Running.html"><strong aria-hidden="true">9.5.</strong> Upload and Running</a></li></ol></li><li class="chapter-item "><a href="../Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">10.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Debian_Rock/Internet.html"><strong aria-hidden="true">10.1.</strong> Internet</a></li><li class="chapter-item "><a href="../Debian_Rock/Workbook.html"><strong aria-hidden="true">10.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="../Debian_Rock/IoT_Network.html"><strong aria-hidden="true">10.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="../Debian_Rock/Python_Script.html"><strong aria-hidden="true">10.4.</strong> Python Script</a></li><li class="chapter-item "><a href="../Debian_Rock/WireShark.html"><strong aria-hidden="true">10.5.</strong> WireShark</a></li></ol></li><li class="chapter-item "><a href="../Security_IoT/Security_IoT.html"><strong aria-hidden="true">11.</strong> Security IoT</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../Security_IoT/Case_Study.html"><strong aria-hidden="true">11.1.</strong> Case Study</a></li></ol></li><li class="chapter-item "><a href="../Data_Analysis/Data_Analysis.html"><strong aria-hidden="true">12.</strong> Data Analysis</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -131,11 +115,18 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="burgundy">Burgundy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dracula">Dracula</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ecoFriend">EcoFriend</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="pinkrose">Pinkrose</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="space">Space</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="sustain">Sustain</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="tokyonight">Tokyonight</button></li>
                         </ul>
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
@@ -145,6 +136,12 @@
                     <h1 class="menu-title">MSA Summer School: IoT Predictive Maintenance</h1>
 
                     <div class="right-buttons">
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School/edit/main/src/ESP8266/Accelerometer.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
 
                     </div>
                 </div>
@@ -170,7 +167,7 @@
                 </script>
 
                 <div id="content" class="content">
-                    <main>
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
                         <h1 id="testing-the-accelerometer"><a class="header" href="#testing-the-accelerometer">Testing the Accelerometer</a></h1>
 <p>In order to understand the this component it is important to review the supporting technical documentation:</p>
 <ul>
@@ -207,6 +204,14 @@
 </li>
 <li>
 <p>Start by adding the standard header information about the script</p>
+ <div id="admonition-code" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-title">
+ <div class="admonition-title">
+ <div id="admonition-code-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code"></a>
+ </div>
+ <div>
 <pre><code class="language-cpp">/*
 * AUTHORS: YOUR NAMES
 * VERSION: 1.0.O
@@ -216,30 +221,57 @@
 *      - Pin = 4 SDA Pin 5 = SCL on Lolin.
 */
 </code></pre>
+ </div>
+ </div>
 </li>
 <li>
 <p>Using the <code>#include</code> directive reference the wire, Adafruit_MMA845, Adafruit_Sensor libraries:</p>
+<div id="admonition-code-1" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-1-title">
+<div class="admonition-title">
+<div id="admonition-code-1-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-1"></a>
+</div>
+<div>
 <pre><code class="language-cpp">...
 
 #include &lt;Wire.h&gt;
 #include &lt;Adafruit_MMA8451.h&gt;
 #include &lt;Adafruit_Sensor.h&gt;
 </code></pre>
-<blockquote>
-<p><strong>Note:</strong></p>
-<blockquote>
-<ul>
-<li>If you see <code>...</code> that means that other code is hidden for brevity</li>
-</ul>
-</blockquote>
-</blockquote>
+</div>
+</div>
 </li>
+</ol>
+<div id="admonition-note" class="admonition admonish-note" role="note" aria-labelledby="admonition-note-title">
+<div class="admonition-title">
+<div id="admonition-note-title">
+<p>Note</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-note"></a>
+</div>
+<div>
+<p>If you see <code>...</code> that means that other code is hidden for brevity</p>
+</div>
+</div>
+<ol start="4">
 <li>
 <p>Because <code>cpp</code> is a obkect orientated programming lanaguage we have the ability to use repeatable templates (<em>classes</em>) for code as <em>objects</em>. Next we create object of the <code>Adafruit_MMA8451</code> class</p>
+ <div id="admonition-code-2" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-2-title">
+ <div class="admonition-title">
+ <div id="admonition-code-2-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code-2"></a>
+ </div>
+ <div>
 <pre><code class="language-cpp">...
 
 Adafruit_MMA8451 mma = Adafruit_MMA8451();
 </code></pre>
+ </div>
+ </div>
 </li>
 <li>
 <p>Next we need to add the following code to inside the <code>void setup(void)</code>:</p>
@@ -248,6 +280,14 @@ Adafruit_MMA8451 mma = Adafruit_MMA8451();
 <li>Set pin modes</li>
 <li>Set up our <code>mma</code> objects communication to the MMA8451Q chip over IIC</li>
 </ul>
+ <div id="admonition-code-3" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-3-title">
+ <div class="admonition-title">
+ <div id="admonition-code-3-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code-3"></a>
+ </div>
+ <div>
 <pre><code class="language-cpp">...
 
 void setup(void){
@@ -272,9 +312,19 @@ mma.setRange(MMA8451_RANGE_2_G); // divides each recieved x,y and z by 4096
 }
 ...
 </code></pre>
+ </div>
+ </div>
 </li>
 <li>
 <p>Now we need to build the functionality to turn on/off and change the direction of the motor and return the vibration sensor data to the terminal, reproduce the following code for the <code>void loop(void)</code>:</p>
+ <div id="admonition-code-4" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-4-title">
+ <div class="admonition-title">
+ <div id="admonition-code-4-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code-4"></a>
+ </div>
+ <div>
 <pre><code class="language-cpp">void loop(){
     sensors_event_t event;
     mma.getEvent(&amp;event);
@@ -312,31 +362,33 @@ mma.setRange(MMA8451_RANGE_2_G); // divides each recieved x,y and z by 4096
     }
 }
 </code></pre>
-<blockquote>
-<p><strong>Note:</strong></p>
-<blockquote>
-<p>It appears there is some repeat code here, that is fine we just want to show that there are clear steps. You could refactor this to remove duplicates like this</p>
-<details>
-<summary>refactored code</summary>
+ </div>
+ </div>
+ <div id="admonition-note-1" class="admonition admonish-note" role="note" aria-labelledby="admonition-note-1-title">
+ <div class="admonition-title">
+ <div id="admonition-note-1-title">
+<p>Note</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-note-1"></a>
+ </div>
+ <div>
+<pre><code> It appears there is some repeat code here, that is fine we just want to show that there are clear steps. You could refactor this to remove duplicates like this
+</code></pre>
 <pre><code class="language-cpp">  sensors_event_t event;
   mma.getEvent(&amp;event);
-
   digitalWrite(D5, LOW); // Motor Forward @500
   analogWrite(D0, 500);
   getData(200);   
-  
+
   digitalWrite(D5, LOW); // Motor Stop
   digitalWrite(D0, LOW);
   getData(100);
-
   digitalWrite(D5, LOW); // Motor Forward @1000
   analogWrite(D0, 1000);
  getData(200);
-
   digitalWrite(D5, LOW); // Motor Stop
   digitalWrite(D0, LOW);
   getData(100);
-
   void getData(int bound){
       for (int i = 0; i &lt; bound; i++){
           sensors_event_t event;
@@ -345,11 +397,19 @@ mma.setRange(MMA8451_RANGE_2_G); // divides each recieved x,y and z by 4096
       }
   }
 </code></pre>
-</blockquote>
-</blockquote>
+ </div>
+ </div>
 </li>
 <li>
 <p>You'll notice that there is a function called <code>printEvent()</code>, we need to add this to the buttom of the script:</p>
+ <div id="admonition-code-5" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-5-title">
+ <div class="admonition-title">
+ <div id="admonition-code-5-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code-5"></a>
+ </div>
+ <div>
 <pre><code class="language-cpp">void printEvent(sensors_event_t event){
     mma.getEvent(&amp;event);
     Serial.print("x: ");
@@ -361,14 +421,19 @@ mma.setRange(MMA8451_RANGE_2_G); // divides each recieved x,y and z by 4096
     Serial.println();
 }
 </code></pre>
-<blockquote>
-<p><strong>Note:</strong></p>
-<blockquote>
-<ul>
-<li>If we want to plot this data later, we can comment out the <code>Serial.print("...");</code></li>
-</ul>
-</blockquote>
-</blockquote>
+ </div>
+ </div>
+ <div id="admonition-note-2" class="admonition admonish-note" role="note" aria-labelledby="admonition-note-2-title">
+ <div class="admonition-title">
+ <div id="admonition-note-2-title">
+<p>Note</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-note-2"></a>
+ </div>
+ <div>
+<p>If we want to plot this data later, we can comment out the <code>Serial.print("...");</code></p>
+ </div>
+ </div>
 </li>
 <li>
 <p>Running the code you should see the following, if you can even wobble the board to...</p>
@@ -376,8 +441,14 @@ mma.setRange(MMA8451_RANGE_2_G); // divides each recieved x,y and z by 4096
 </li>
 </ol>
 <h2 id="full-code-below"><a class="header" href="#full-code-below">Full code below</a></h2>
-<details>
-<summary>Click here:</summary>
+<details id="admonition-click-here" class="admonition admonish-code" role="note" aria-labelledby="admonition-click-here-title">
+<summary class="admonition-title">
+<div id="admonition-click-here-title">
+<p>Click here</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-click-here"></a>
+</summary>
+<div>
 <pre><code class="language-cpp">/*
 * AUTHORS: YOUR NAMES
 * VERSION: 1.0.O
@@ -457,9 +528,9 @@ void printEvent(sensors_event_t event){
 
 }
 </code></pre>
+</div>
 </details>
                     </main>
-
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="../ESP8266/Photo_Interrupter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
@@ -504,6 +575,7 @@ void printEvent(sensors_event_t event){
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
 
 
     </div>

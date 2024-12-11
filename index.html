@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -28,18 +28,25 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./theme/pagetoc.css">
+        <link rel="stylesheet" href="./theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="./theme/css/code.css">
+        <link rel="stylesheet" href="./theme/css/terminal.css">
+        <link rel="stylesheet" href="./theme/css/output.css">
 
         <!-- MathJax -->
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -61,19 +68,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -83,45 +87,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">Main</li><li class="chapter-item expanded "><a href="Introduction/Introduction.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item "><a href="SelfStudy/SelfStudy.html"><strong aria-hidden="true">2.</strong> Self Study</a></li><li class="chapter-item "><a href="ProjOverview/ProjOverview.html"><strong aria-hidden="true">3.</strong> Project Overview</a></li><li class="chapter-item "><a href="ProjMgmt/ProjMmgt.html"><strong aria-hidden="true">4.</strong> Project Management</a></li><li class="chapter-item "><a href="CriticalPath/CriticalPath.html"><strong aria-hidden="true">5.</strong> Critcial Path</a></li><li class="chapter-item "><a href="Documentation/Documentation.html"><strong aria-hidden="true">6.</strong> Documentation</a></li><li class="chapter-item "><a href="CDSim/CDSim.html"><strong aria-hidden="true">7.</strong> Circuit Design and Simulation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="CDSim/OpAmps.html"><strong aria-hidden="true">7.1.</strong> OpAmps</a></li><li class="chapter-item "><a href="CDSim/MOSFETS.html"><strong aria-hidden="true">7.2.</strong> MOSFETS</a></li><li class="chapter-item "><a href="CDSim/Filters.html"><strong aria-hidden="true">7.3.</strong> Filters</a></li></ol></li><li class="chapter-item "><a href="Soldering/Soldering_Instructions.html"><strong aria-hidden="true">8.</strong> Soldering Instructions</a></li><li class="chapter-item "><a href="ESP8266/ESP8266.html"><strong aria-hidden="true">9.</strong> ESP8266</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ESP8266/Set_Up.html"><strong aria-hidden="true">9.1.</strong> ESP8266</a></li><li class="chapter-item "><a href="ESP8266/Testing_Sensors.html"><strong aria-hidden="true">9.2.</strong> Testing Sensors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="ESP8266/Temperature.html"><strong aria-hidden="true">9.2.1.</strong> Temperature</a></li><li class="chapter-item "><a href="ESP8266/Photo_Interrupter.html"><strong aria-hidden="true">9.2.2.</strong> Photo Interrupter</a></li><li class="chapter-item "><a href="ESP8266/Accelerometer.html"><strong aria-hidden="true">9.2.3.</strong> Accelerometer</a></li></ol></li><li class="chapter-item "><a href="ESP8266/IoT_Setup.html"><strong aria-hidden="true">9.3.</strong> IoT Setup</a></li><li class="chapter-item "><a href="ESP8266/Build_WebPage.html"><strong aria-hidden="true">9.4.</strong> Build Webpage</a></li><li class="chapter-item "><a href="ESP8266/Upload_Running.html"><strong aria-hidden="true">9.5.</strong> Upload and Running</a></li></ol></li><li class="chapter-item "><a href="Debian_Rock/Debian_Rock.html"><strong aria-hidden="true">10.</strong> Debian Rock C4</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Debian_Rock/Internet.html"><strong aria-hidden="true">10.1.</strong> Internet</a></li><li class="chapter-item "><a href="Debian_Rock/Workbook.html"><strong aria-hidden="true">10.2.</strong> Updating Workbook</a></li><li class="chapter-item "><a href="Debian_Rock/IoT_Network.html"><strong aria-hidden="true">10.3.</strong> IoT Network</a></li><li class="chapter-item "><a href="Debian_Rock/Python_Script.html"><strong aria-hidden="true">10.4.</strong> Python Script</a></li><li class="chapter-item "><a href="Debian_Rock/WireShark.html"><strong aria-hidden="true">10.5.</strong> WireShark</a></li></ol></li><li class="chapter-item "><a href="Security_IoT/Security_IoT.html"><strong aria-hidden="true">11.</strong> Security IoT</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Security_IoT/Case_Study.html"><strong aria-hidden="true">11.1.</strong> Case Study</a></li></ol></li><li class="chapter-item "><a href="Data_Analysis/Data_Analysis.html"><strong aria-hidden="true">12.</strong> Data Analysis</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -131,11 +115,18 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="burgundy">Burgundy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dracula">Dracula</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ecoFriend">EcoFriend</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="pinkrose">Pinkrose</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="space">Space</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="sustain">Sustain</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="tokyonight">Tokyonight</button></li>
                         </ul>
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
@@ -145,6 +136,12 @@
                     <h1 class="menu-title">MSA Summer School: IoT Predictive Maintenance</h1>
 
                     <div class="right-buttons">
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School/edit/main/src/Introduction/Introduction.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
 
                     </div>
                 </div>
@@ -170,7 +167,7 @@
                 </script>
 
                 <div id="content" class="content">
-                    <main>
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This mdBook guide you through the IOT Predictive Maintenance project for this years summer school.</p>
 <table>
@@ -225,7 +222,6 @@ Clicking a highlighted word or pressing the <code>Esc</code> key will remove the
 <p>Therefore, please print only if this is really necessary.</p>
 
                     </main>
-
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
@@ -264,6 +260,7 @@ Clicking a highlighted word or pressing the <code>Esc</code> key will remove the
         <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="theme/pagetoc.js"></script>
 
 
     </div>
