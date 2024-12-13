@@ -229,6 +229,29 @@
 </div>
 <h2 id="security-and-authentication"><a class="header" href="#security-and-authentication">Security and authentication</a></h2>
 <p>You need to create an ssh key to push and pull to your online storage/repo before we try to sync with the cloud.</p>
+<div id="admonition-important" class="admonition admonish-tip" role="note" aria-labelledby="admonition-important-title">
+<div class="admonition-title">
+<div id="admonition-important-title">
+<p>Important</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-important"></a>
+</div>
+<div>
+<ul>
+<li>
+<p>When you see <code>~</code>, this means <strong>home</strong>,</p>
+<ul>
+<li>
+<p>On the university imaged machines this typically is the <code>G Drive</code></p>
+</li>
+<li>
+<p>If you are not then this will be, <code>C/Users/&lt;username&gt;/</code>, your <strong>home</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <p>Follow these instructions in the command line.</p>
 <div id="admonition-terminal-2" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-2-title">
 <div class="admonition-title">
@@ -244,12 +267,12 @@
 </div>
 </div>
 <p>For every line requesting  user input just press the enter key and until the command has finished.</p>
-<div id="admonition-note-1" class="admonition admonish-note" role="note" aria-labelledby="admonition-note-1-title">
+<div id="admonition-output" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-title">
 <div class="admonition-title">
-<div id="admonition-note-1-title">
-<p>Note</p>
+<div id="admonition-output-title">
+<p>Output</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-note-1"></a>
+<a class="admonition-anchor-link" href="#admonition-output"></a>
 </div>
 <div>
 <pre><code class="language-sh">Generating public/private ed25519 key pair.
@@ -274,6 +297,23 @@ The key's randomart image is:
 |*OO+             |
 +----[SHA256]-----+
 </code></pre>
+</div>
+</div>
+<div id="admonition-error" class="admonition admonish-danger" role="note" aria-labelledby="admonition-error-title">
+<div class="admonition-title">
+<div id="admonition-error-title">
+<p>Error</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-error"></a>
+</div>
+<div>
+<p>If you get a response</p>
+<pre><code>Saving key ".ssh" failed: No such file or directory
+</code></pre>
+<p>Then you need to do the following</p>
+<pre><code>mkdir ~/.ssh
+</code></pre>
+<p>and then repeat the previous step again.</p>
 </div>
 </div>
 <p>Now you need to get your public key you have generated and add to GitHub.</p>
@@ -313,12 +353,12 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJf5t9RcKdkZwlxS14EZn91hDQndAjMIDz+c92kFtfC
 </code></pre>
 </div>
 </div>
-<div id="admonition-output" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-title">
+<div id="admonition-output-1" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-1-title">
 <div class="admonition-title">
-<div id="admonition-output-title">
+<div id="admonition-output-1-title">
 <p>Output</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-output"></a>
+<a class="admonition-anchor-link" href="#admonition-output-1"></a>
 </div>
 <div>
 <pre><code class="language-sh">The authenticity of host 'github.com (140.82.121.4)' can't be established.
@@ -328,47 +368,62 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 </code></pre>
 </div>
 </div>
-<div id="admonition-output-1" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-1-title">
+<div id="admonition-output-2" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-2-title">
 <div class="admonition-title">
-<div id="admonition-output-1-title">
+<div id="admonition-output-2-title">
 <p>Output</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-output-1"></a>
+<a class="admonition-anchor-link" href="#admonition-output-2"></a>
 </div>
 <div>
 <pre><code class="language-sh">Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
 PTY allocation request failed on channel 0
-Hi CompEng0001! You've successfully authenticated, but GitHub does not provide shell access.
+Hi &lt;Your GitHub Username&gt;! You've successfully authenticated, but GitHub does not provide shell access.
 Connection to github.com closed.
 </code></pre>
 </div>
 </div>
-<div id="admonition-note-2" class="admonition admonish-note" role="note" aria-labelledby="admonition-note-2-title">
+<div id="admonition-tip" class="admonition admonish-tip" role="note" aria-labelledby="admonition-tip-title">
 <div class="admonition-title">
-<div id="admonition-note-2-title">
-<p>Note</p>
+<div id="admonition-tip-title">
+<p>Tip</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-note-2"></a>
+<a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
 <ul>
-<li>You only have do this once per machine.</li>
+<li>
+<p>If you are on the university image and <code>~</code> is the <code>G Drive</code> you only have to do all the above once.</p>
+</li>
+<li>
+<p>You need to repeat if you do this on any other machine to set up the key, but again only once.</p>
+</li>
 </ul>
 </div>
 </div>
+<h3 id="mfa"><a class="header" href="#mfa">MFA</a></h3>
+<p>In order to access <a href="https://github.com/UniofGreenwich">https://github.com/UniofGreenwich</a> you need to have enabled MFA on your GitHub account, if you can see this repository you likely already have.</p>
+<ul>
+<li>
+<p>Navigate to <strong>Password and authentication</strong> and enable MFA:</p>
+<p><img src="./figures/MFA.png" alt="" /></p>
+</li>
+</ul>
 <h3 id="creating-your-markdown-book"><a class="header" href="#creating-your-markdown-book">Creating your markdown book</a></h3>
 <ol>
 <li>
-<p>Inside the <code>https://github.comUniofGreenwich</code> organisation page you create a new repository give it the following naming convention:</p>
+<p>Inside the <a href="https://github.com/UniofGreenwich">https://github.com/UniofGreenwich</a> organisation page you create a new repository give it the following naming convention:</p>
 <pre><code>ModuleCode_Exercices
 </code></pre>
 </li>
 <li>
 <p>Use the template option and search for <code>MD_Book_Template</code></p>
 </li>
-<li></li>
+<li>
+<p>See gif below:</p>
+<p><img src="./figures/Using_Template.gif" alt="" /></p>
+</li>
 </ol>
-<h3 id=""><a class="header" href="#"></a></h3>
 <h2 id="tech-stack"><a class="header" href="#tech-stack">Tech Stack</a></h2>
 <p>This template includes the following tech stack:</p>
 <ul>
