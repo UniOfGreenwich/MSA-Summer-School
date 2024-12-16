@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Upload and Running - MSA Summer School: IoT Predictive Maintenance</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././theme/pagetoc.css">
+        <link rel="stylesheet" href=".././theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href=".././theme/css/code.css">
+        <link rel="stylesheet" href=".././theme/css/terminal.css">
+        <link rel="stylesheet" href=".././theme/css/output.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="burgundy">Burgundy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dracula">Dracula</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ecoFriend">EcoFriend</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="pinkrose">Pinkrose</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="space">Space</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="sustain">Sustain</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="tokyonight">Tokyonight</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MSA Summer School: IoT Predictive Maintenance</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School/edit/main/src/ESP8266/Upload_Running.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="upload-and-running"><a class="header" href="#upload-and-running">Upload and Running</a></h1>
+<p>It is essiential that you have completed the following sections:</p>
+<ul>
+<li><a href="./IoT_Setup.html">IoT Setup</a></li>
+<li><a href="./Build_WebPage.html">Build WebPage</a></li>
+</ul>
+<ol>
+<li>
+<p>Once you have compiled and uploaded the code you can connect to the board with a laptop/phone/tablet that has WiFi capabilities.</p>
+</li>
+<li>
+<p>Connect to the ssid of your WiFi, which defined in the <a href="./IoT_Setup.html">IoT Setup</a>. This section uses has the ssid "D1_Mini". In this example I am using the Single Board Computer, the Rock C4.</p>
+</li>
+<li>
+<p>You should launch a browser and navigate to the following IP address, <code>192.168.4.1</code>, and see the following webpage:</p>
+<p><img src="./figures/motor_dashboard.png" alt="" /></p>
+</li>
+<li>
+<p>The webpage should update every few seconds, and you could try tilting the board to see if the accelrometer data changes:</p>
+<p><img src="./figures/motor_dashboard.png" alt="" /></p>
+</li>
+<li>
+<p>If you provide power to for the motor like this, you should be able to get the motor to spin in a clockwise, counterclockwise directions or stop, by pressing the respecive buttons, remember that the servier.handleClient deals with the request from the webpage and then the code handles the string with "Forward", "Reverse", and "Stop"</p>
+ <div id="admonition-code" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-title">
+ <div class="admonition-title">
+ <div id="admonition-code-title">
+<p>Code</p>
+ </div>
+ <a class="admonition-anchor-link" href="#admonition-code"></a>
+ </div>
+ <div>
+<pre><code class="language-cpp">...
+String m_state = server.arg("button");  //Get button state
+
+if (m_state == "Forward") {
+    digitalWrite(D5, LOW);  //Motor Forward
+    analogWrite(D0, 500);
+    Motor_state = "Forward";
+}
+...
+</code></pre>
+ </div>
+ </div>
+<p><img src="" alt="" /></p>
+<p>Webpage updating on "Forward, "Stop" and "Reverse"</p>
+<p><img src="" alt="" /></p>
+</li>
+<li>
+<p>So this is all fine and dandy, but we are not actually logging any of the is data, once webpage updates the values disappear. We are going to update a predictive.ino to provide a new page that displays the all the data that can be caputred by the single board computer or any computer by running a python script.</p>
+<ul>
+<li>
+<p>First add the following line in the <code>setup()</code> function in as indicated below:</p>
+  <div id="admonition-code-1" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-1-title">
+  <div class="admonition-title">
+  <div id="admonition-code-1-title">
+<p>Code</p>
+  </div>
+  <a class="admonition-anchor-link" href="#admonition-code-1"></a>
+  </div>
+  <div>
+<pre><code class="language-cpp">...
+server.on("/", handleRoot);      //Which routine to handle at root location
+server.on("/sbc",handleSBC);     // This is the new line of code, that will respond when the SBC requests the data
+server.on("/form", handleForm);  //These request sent when we click on button
+server.begin();                  //Start server
+...
+</code></pre>
+  </div>
+  </div>
+</li>
+<li>
+<p>Lastly, at the end the file add a new function below the <code>handleForm()</code>:</p>
+  <div id="admonition-code-2" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-2-title">
+  <div class="admonition-title">
+  <div id="admonition-code-2-title">
+<p>Code</p>
+  </div>
+  <a class="admonition-anchor-link" href="#admonition-code-2"></a>
+  </div>
+  <div>
+<pre><code class="language-cpp">/**
+* @brief Sends sensor data to a Single Board Computer (SBC).
+*
+* This function compiles various sensor readings into a comma-separated string
+* and sends it to a connected SBC. The data includes motor temperature, ambient
+* temperature, humidity, temperature, motor speed, motor state, and vibration
+* readings along the x, y, and z axes.
+*
+* @param none Uses global variables to compile data.
+* @return void
+*/
+void handleSBC(){
+    String dataForSBC = String(m_Temp)+ ","+ String(a_Temp)+ ","+ String(h)+ ","
+    + String(t)+ ","+ String(motor_speed)+ ","+ String(Motor_state)+ ","
+    + String(x_axis)+ ","+ String(y_axis)+ ","+ String(z_axis)+ ","+ String(rms_vib);
+    server.send(200, "/text/plain", dataForSBC);  // Send data to SBC
+}
+</code></pre>
+  </div>
+  </div>
+</li>
+</ul>
+</li>
+<li>
+<p>Compile and upload the code to the board again, and once served, append the URL with <code>/scb</code>, <code>192.168.4.1/sbc</code>, and you should see something like this:</p>
+<p><img src="./figures/motor_dashboard.png" alt="" /></p>
+</li>
+<li>
+<p>The ESP8266 is esseintially finished, but now we need to work on the SBC so we can automate the data collection to perform data analysis on, navigate to here:</p>
+<ul>
+<li><a href="../Debian_Rock/Debian_Rock.html">Debian Rock C4</a>.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ESP8266/Build_WebPage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Debian_Rock/Debian_Rock.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ESP8266/Build_WebPage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Debian_Rock/Debian_Rock.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

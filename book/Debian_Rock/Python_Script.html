@@ -1,0 +1,1033 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Python Script - MSA Summer School: IoT Predictive Maintenance</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././theme/pagetoc.css">
+        <link rel="stylesheet" href=".././theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href=".././theme/css/code.css">
+        <link rel="stylesheet" href=".././theme/css/terminal.css">
+        <link rel="stylesheet" href=".././theme/css/output.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="burgundy">Burgundy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="dracula">Dracula</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ecoFriend">EcoFriend</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="pinkrose">Pinkrose</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="space">Space</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="sustain">Sustain</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="tokyonight">Tokyonight</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">MSA Summer School: IoT Predictive Maintenance</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/uniofgreenwich/MSA-Summer-School/edit/main/src/Debian_Rock/Python_Script.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="building-a-predictive-maintenance-script-in-python"><a class="header" href="#building-a-predictive-maintenance-script-in-python">Building a Predictive Maintenance Script in Python</a></h1>
+<p>This section will help you build a Python script for predictive maintenance, step by step. The script will request data over HTTP and write the data to a specified location.</p>
+<h2 id="step-1-create-the-directory"><a class="header" href="#step-1-create-the-directory">Step 1: Create the Directory</a></h2>
+<p>First, let's create a directory to store your script and related files.</p>
+<p>Open your terminal and run the following command:</p>
+<div id="admonition-terminal" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-title">
+<div class="admonition-title">
+<div id="admonition-terminal-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ mkdir ~/predictiveMaintenance
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-title">
+<div class="admonition-title">
+<div id="admonition-explanation-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>mkdir</code> is used to create a new directory.</p>
+</li>
+<li>
+<p><code>~</code> represents your home directory,</p>
+</li>
+<li>
+<p><code>predictiveMaintenance</code> is the name of the directory.</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="step-2-navigate-to-the-directory"><a class="header" href="#step-2-navigate-to-the-directory">Step 2: Navigate to the Directory</a></h2>
+<p>Change to the newly created directory:</p>
+<div id="admonition-terminal-1" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-1-title">
+<div class="admonition-title">
+<div id="admonition-terminal-1-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-1"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ cd ~/predictiveMaintenance
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-1" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-1-title">
+<div class="admonition-title">
+<div id="admonition-explanation-1-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-1"></a>
+</div>
+<div>
+<ul>
+<li><code>cd</code> stands for "change directory". This command moves you into the <code>predictiveMaintenance</code> directory.</li>
+</ul>
+</div>
+</div>
+<h2 id="step-3-create-the-python-script-file"><a class="header" href="#step-3-create-the-python-script-file">Step 3: Create the Python Script File</a></h2>
+<p>Create a new Python file called <code>predictiveMaintenance.py</code> using a text editor. You can use either <code>nano</code> or <code>vim</code>.</p>
+<p>Using <code>nano</code>:</p>
+<div id="admonition-terminal-2" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-2-title">
+<div class="admonition-title">
+<div id="admonition-terminal-2-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-2"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ nano predictiveMaintenance.py
+</code></pre>
+</div>
+</div>
+<p>Using <code>vim</code>:</p>
+<div id="admonition-terminal-3" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-3-title">
+<div class="admonition-title">
+<div id="admonition-terminal-3-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-3"></a>
+</div>
+<div>
+<pre><code class="language-sh">vim predictiveMaintenance.py
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-2" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-2-title">
+<div class="admonition-title">
+<div id="admonition-explanation-2-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-2"></a>
+</div>
+<div>
+<ul>
+<li>These commands open a text editor (<code>nano</code> or <code>vim</code>) and create a new file called <code>predictiveMaintenance.py</code>.</li>
+</ul>
+</div>
+</div>
+<h2 id="step-4-add-header-information"><a class="header" href="#step-4-add-header-information">Step 4: Add Header Information</a></h2>
+<p>Start by adding the header information to your script:</p>
+<div id="admonition-code" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-title">
+<div class="admonition-title">
+<div id="admonition-code-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code"></a>
+</div>
+<div>
+<pre><code class="language-py"># FILE: predictiveMaintenance.py
+# AUTHORS: Name of everyone who is in your team
+# Version: 1.0.0
+# NOTES: Script requests data over HTTP and writes it to a specified location.
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-3" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-3-title">
+<div class="admonition-title">
+<div id="admonition-explanation-3-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-3"></a>
+</div>
+<div>
+<ul>
+<li>These comments provide metadata about the script, including the filename, author, version, and a brief description of what the script does.</li>
+</ul>
+</div>
+</div>
+<h2 id="step-5-import-required-packages"><a class="header" href="#step-5-import-required-packages">Step 5: Import Required Packages</a></h2>
+<p>Next, import the necessary Python packages:</p>
+<div id="admonition-code-1" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-1-title">
+<div class="admonition-title">
+<div id="admonition-code-1-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-1"></a>
+</div>
+<div>
+<pre><code class="language-py">... 
+import requests
+import csv
+import os
+import sys
+from datetime import datetime
+import time
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-4" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-4-title">
+<div class="admonition-title">
+<div id="admonition-explanation-4-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-4"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>...</code> indicates to you, that there is more code above but it is not shown for brevity, do <strong>not</strong> write <code>...</code></p>
+</li>
+<li>
+<p><code>requests</code> : Allows you to send HTTP requests.</p>
+</li>
+<li>
+<p><code>csv</code> : Provides functionality to read from and write to CSV files.</p>
+</li>
+<li>
+<p><code>os</code> : Provides a way of interacting with the operating system.</p>
+</li>
+<li>
+<p><code>sys</code> : Provides access to system-specific parameters and functions.</p>
+</li>
+<li>
+<p><code>datetime</code> : Supplies classes for manipulating dates and times.</p>
+</li>
+<li>
+<p><code>time</code> : Provides various time-related functions.</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="step-6-define-constants"><a class="header" href="#step-6-define-constants">Step 6: Define Constants</a></h2>
+<p>Define constants for the data log path and delay between requests:</p>
+<div id="admonition-code-2" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-2-title">
+<div class="admonition-title">
+<div id="admonition-code-2-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-2"></a>
+</div>
+<div>
+<pre><code class="language-py">...
+# The path to the data log
+data_log_csv = '/home/rock/predictiveMaintenance/data.csv'
+
+# Delay (in seconds)
+delay = 0.5
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-5" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-5-title">
+<div class="admonition-title">
+<div id="admonition-explanation-5-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-5"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>data_log_csv</code>: Specifies the path to the CSV file where data will be logged.</p>
+</li>
+<li>
+<p><code>delay</code>: Sets a delay of 0.5 seconds between each data request.</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="step-7-create-the-main-loop"><a class="header" href="#step-7-create-the-main-loop">Step 7: Create the Main Loop</a></h2>
+<p>Write the main loop that will run indefinitely. Add the following code to your script:</p>
+<h3 id="step-71-start-the-main-loop"><a class="header" href="#step-71-start-the-main-loop">Step 7.1: Start the Main Loop</a></h3>
+<div id="admonition-code-3" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-3-title">
+<div class="admonition-title">
+<div id="admonition-code-3-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-3"></a>
+</div>
+<div>
+<pre><code class="language-py">...
+# Run forever, or until the program is killed
+while True:
+
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-6" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-6-title">
+<div class="admonition-title">
+<div id="admonition-explanation-6-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-6"></a>
+</div>
+<div>
+<ul>
+<li>This creates an infinite loop that will run continuously until the program is manually stopped.</li>
+</ul>
+</div>
+</div>
+<h3 id="step-72-try-block"><a class="header" href="#step-72-try-block">Step 7.2: Try Block</a></h3>
+<div id="admonition-code-4" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-4-title">
+<div class="admonition-title">
+<div id="admonition-code-4-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-4"></a>
+</div>
+<div>
+<pre><code class="language-py">...
+while True:
+    try:
+
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-7" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-7-title">
+<div class="admonition-title">
+<div id="admonition-explanation-7-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-7"></a>
+</div>
+<div>
+<ul>
+<li>This starts a <code>try</code> block to handle any exceptions that might occur during the execution of the code inside the loop.</li>
+</ul>
+</div>
+</div>
+<h3 id="step-73-perform-a-get-request-and-decode-the-response"><a class="header" href="#step-73-perform-a-get-request-and-decode-the-response">Step 7.3: Perform a GET Request and Decode the Response</a></h3>
+<div id="admonition-code-5" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-5-title">
+<div class="admonition-title">
+<div id="admonition-code-5-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-5"></a>
+</div>
+<div>
+<pre><code class="language-py">...
+while True:
+    try:
+        # Perform a GET request from the ESP8266
+        r = requests.get('http://192.168.4.1/sbc')
+
+        # Decode the response and split by the delimiter ','
+        data = r.content.decode("ascii").split(',')
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-8" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-8-title">
+<div class="admonition-title">
+<div id="admonition-explanation-8-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-8"></a>
+</div>
+<div>
+<ul>
+<li>
+<p>The first new line sends an HTTP GET request to the specified URL (<code>http://192.168.4.1/sbc</code>) to retrieve data from the ESP8266 device.</p>
+</li>
+<li>
+<p>The second new line decodes the response content from ASCII format and splits it into a list using a comma as the delimiter.</p>
+</li>
+</ul>
+</div>
+</div>
+<h3 id="step-74-print-the-data"><a class="header" href="#step-74-print-the-data">Step 7.4: Print the Data</a></h3>
+<p>For debugging purposes we can return the the decoded response to the terminal:</p>
+<div id="admonition-code-6" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-6-title">
+<div class="admonition-title">
+<div id="admonition-code-6-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-6"></a>
+</div>
+<div>
+<pre><code class="language-py">...
+while True:
+    try:
+        # Perform a GET request from the ESP8266
+        r = requests.get('http://192.168.4.1/sbc')
+
+        # Decode the response and split by the delimiter ','
+        data = r.content.decode("ascii").split(',')
+
+        print(data)
+</code></pre>
+</div>
+</div>
+<h3 id="step-75-add-a-timestamp"><a class="header" href="#step-75-add-a-timestamp">Step 7.5: Add a Timestamp</a></h3>
+<div id="admonition-code-7" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-7-title">
+<div class="admonition-title">
+<div id="admonition-code-7-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-7"></a>
+</div>
+<div>
+<pre><code class="language-py">        ...
+        print(data)
+
+        # Prepend the timestamp with microsecond precision
+        timestamp = datetime.now().isoformat(timespec='microseconds')
+        data.insert(0, timestamp)
+
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-9" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-9-title">
+<div class="admonition-title">
+<div id="admonition-explanation-9-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-9"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>datetime.now().isoformat(timespec='microseconds')</code>: Gets the current timestamp with microsecond precision and formats it as a string.</p>
+</li>
+<li>
+<p><code>data.insert(0, timestamp)</code>: Inserts the timestamp at the beginning of the data list.</p>
+</li>
+</ul>
+</div>
+</div>
+<h3 id="step-76-check-data-length"><a class="header" href="#step-76-check-data-length">Step 7.6: Check Data Length</a></h3>
+<div id="admonition-code-8" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-8-title">
+<div class="admonition-title">
+<div id="admonition-code-8-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-8"></a>
+</div>
+<div>
+<pre><code class="language-py">        ...
+        data.insert(0, timestamp)
+
+        # Check message is the correct length (timestamp + data)
+        if len(data) == 11:
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-10" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-10-title">
+<div class="admonition-title">
+<div id="admonition-explanation-10-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-10"></a>
+</div>
+<div>
+<ul>
+<li>This checks if the length of the data list is 11 (timestamp plus 10 data points). We don't want to write missing data points.</li>
+</ul>
+</div>
+</div>
+<h3 id="step-77-check-if-file-exists"><a class="header" href="#step-77-check-if-file-exists">Step 7.7: Check if File Exists</a></h3>
+<div id="admonition-code-9" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-9-title">
+<div class="admonition-title">
+<div id="admonition-code-9-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-9"></a>
+</div>
+<div>
+<pre><code class="language-py">        ...
+        if len(data) == 11:
+           
+            # Check if the file exists, if not, create it or fail and close the program
+            if not os.path.exists(data_log_csv):
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-11" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-11-title">
+<div class="admonition-title">
+<div id="admonition-explanation-11-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-11"></a>
+</div>
+<div>
+<ul>
+<li>This checks if the CSV file specified by data_log_csv exists. If it does not exist, the following code block will create it.</li>
+</ul>
+</div>
+</div>
+<h3 id="step-78-create-and-write-headers-to-csv"><a class="header" href="#step-78-create-and-write-headers-to-csv">Step 7.8: Create and Write Headers to CSV</a></h3>
+<div id="admonition-code-10" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-10-title">
+<div class="admonition-title">
+<div id="admonition-code-10-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-10"></a>
+</div>
+<div>
+<pre><code class="language-py">        ...
+            # Check if the file exists, if not, create it or fail and close the program
+            if not os.path.exists(data_log_csv):
+
+                with open(data_log_csv, mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    
+                    # Set first row headers
+                    writer.writerow(['TimeStamp','TMP36_Temp',
+                     'DHT11_Ambient_Temp','DHT11_Humidity',
+                     'Motor_Temperature','Motor_Speed_(RPM)',
+                     'Motor_State','Accel_x-axis','Accel_y-axis',
+                     'Accel_z-axis', 'RMS_Vibration'])
+
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-12" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-12-title">
+<div class="admonition-title">
+<div id="admonition-explanation-12-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-12"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>with open(data_log_csv, mode='w', newline='') as file:</code>: Opens the CSV file in write mode. If the file doesn't exist, it will be created.</p>
+</li>
+<li>
+<p><code>csv.writer(file)</code>: Creates a CSV writer object.</p>
+</li>
+<li>
+<p><code>writer.writerow([...])</code>: Writes the header row to the CSV file.</p>
+</li>
+</ul>
+</div>
+</div>
+<h3 id="step-79-append-data-to-csv"><a class="header" href="#step-79-append-data-to-csv">Step 7.9: Append Data to CSV</a></h3>
+<div id="admonition-code-11" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-11-title">
+<div class="admonition-title">
+<div id="admonition-code-11-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-11"></a>
+</div>
+<div>
+<pre><code class="language-py">      ...
+            # Check if the file exists, if not, create it or fail and close the program
+            if not os.path.exists(data_log_csv):
+                ...
+            # Append CSV with the data
+            with open(data_log_csv, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(data)
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-13" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-13-title">
+<div class="admonition-title">
+<div id="admonition-explanation-13-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-13"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>with open(data_log_csv, mode='a', newline='') as file:</code>: Opens the CSV file in append mode to add new data without overwriting the existing content.</p>
+</li>
+<li>
+<p><code>csv.writer(file)</code>: Creates a CSV writer object.</p>
+</li>
+<li>
+<p><code>writer.writerow(data)</code>: Writes the data row to the CSV file.</p>
+</li>
+</ul>
+</div>
+</div>
+<h3 id="step-710-add-delay"><a class="header" href="#step-710-add-delay">Step 7.10: Add Delay</a></h3>
+<div id="admonition-code-12" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-12-title">
+<div class="admonition-title">
+<div id="admonition-code-12-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-12"></a>
+</div>
+<div>
+<pre><code class="language-py">      ...
+            # Append CSV with the data
+            with open(data_log_csv, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(data)
+
+        # Add delay
+        time.sleep(delay)
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-14" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-14-title">
+<div class="admonition-title">
+<div id="admonition-explanation-14-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-14"></a>
+</div>
+<div>
+<ul>
+<li>This pauses the script for the duration specified by delay (0.5 seconds).</li>
+</ul>
+</div>
+</div>
+<h3 id="step-711-exception-handling"><a class="header" href="#step-711-exception-handling">Step 7.11: Exception Handling</a></h3>
+<div id="admonition-code-13" class="admonition admonish-code" role="note" aria-labelledby="admonition-code-13-title">
+<div class="admonition-title">
+<div id="admonition-code-13-title">
+<p>Code</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-code-13"></a>
+</div>
+<div>
+<pre><code class="language-py"># Run forever, or until the program is killed
+while True:
+    try:
+        ...
+    # Any exceptions are caught and returned to the CLI
+    except Exception as e:
+        print(f"Error: {e}")
+        print("Unable to create or write to the CSV file. Program will now exit")
+        sys.exit(1)
+
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-15" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-15-title">
+<div class="admonition-title">
+<div id="admonition-explanation-15-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-15"></a>
+</div>
+<div>
+<ul>
+<li>
+<p><code>except Exception as e:</code>: Catches any exceptions that occur during the execution of the <code>try</code> block.</p>
+</li>
+<li>
+<p><code>print(f"Error: {e}")</code>: Prints the error message to the terminal.</p>
+</li>
+<li>
+<p><code>print("Unable to create or write to the CSV file. Program will now exit")</code>: Prints an error message indicating that the program will exit.</p>
+</li>
+<li>
+<p><code>sys.exit(1)</code>: Exits the program with an error code of 1.</p>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="step-8-making-the-script-an-executable"><a class="header" href="#step-8-making-the-script-an-executable">Step 8: Making the script an executable</a></h2>
+<p>Before running the script, ensure you have the necessary permissions. Make the script executable:</p>
+<div id="admonition-terminal-4" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-4-title">
+<div class="admonition-title">
+<div id="admonition-terminal-4-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-4"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ chmod +x predictiveMaintenance.py
+</code></pre>
+</div>
+</div>
+<div id="admonition-explanation-16" class="admonition admonish-example" role="note" aria-labelledby="admonition-explanation-16-title">
+<div class="admonition-title">
+<div id="admonition-explanation-16-title">
+<p>Explanation</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-explanation-16"></a>
+</div>
+<div>
+<ul>
+<li>
+<p>The <code>chmod</code> command in Unix/Linux systems is used to change the file mode bits of a file. These bits determine the file's permissions. &gt;&gt; - The <code>+x</code> argument
+cifically adds execute permissions to the file for the user, group, and others</p>
+</li>
+<li>
+<p>For example, before <code>chmod +x</code>, the file permissions might look like this:</p>
+<pre><code class="language-sh">
+-rw-r--r-- 1 user group  4096 Jun 14 12:34 predictiveMaintenance.py
+
+</code></pre>
+<p>After running chmod +x, the permissions change to:</p>
+<pre><code class="language-sh">
+-rwxr-xr-x 1 user group  4096 Jun 14 12:34 predictiveMaintenance.py
+
+</code></pre>
+</li>
+</ul>
+</div>
+</div>
+<h2 id="step-9-running-the-script"><a class="header" href="#step-9-running-the-script">Step 9: Running the script:</a></h2>
+<p>You should be able to run the script like this:</p>
+<div id="admonition-terminal-5" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-5-title">
+<div class="admonition-title">
+<div id="admonition-terminal-5-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-5"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ ./predictiveMaintenance.py
+</code></pre>
+</div>
+</div>
+<p>or</p>
+<div id="admonition-terminal-6" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-6-title">
+<div class="admonition-title">
+<div id="admonition-terminal-6-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-6"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ python3 predictiveMaintenance.py
+</code></pre>
+</div>
+</div>
+<p>The output should look like:</p>
+<div id="admonition-output" class="admonition admonish-output" role="note" aria-labelledby="admonition-output-title">
+<div class="admonition-title">
+<div id="admonition-output-title">
+<p>Output</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-output"></a>
+</div>
+<div>
+<pre><code>&gt;
+</code></pre>
+</div>
+</div>
+<p>If you open another terminal, <kbd>ctrl</kbd>+<kbd>t</kbd>, you can look in the content of the <code>data.csv</code> file:</p>
+<div id="admonition-terminal-7" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-7-title">
+<div class="admonition-title">
+<div id="admonition-terminal-7-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-7"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ tail -f predictiveMaintenance/data.csv
+</code></pre>
+</div>
+</div>
+<p>or</p>
+<div id="admonition-terminal-8" class="admonition admonish-terminal" role="note" aria-labelledby="admonition-terminal-8-title">
+<div class="admonition-title">
+<div id="admonition-terminal-8-title">
+<p>Terminal</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-terminal-8"></a>
+</div>
+<div>
+<pre><code class="language-sh">$ less +G predictiveMaintenance/data.csv
+</code></pre>
+</div>
+</div>
+<p>You can download some example data captured before: <a href="../../predictiveMaintenance/data.csv">data.csv</a></p>
+<p>The output these commands should look something like this, and everytime there is a change you get an additionally line with the latest data.</p>
+<p>You can download some example data captured before: <a href="./data.csv">data.csv</a></p>
+<p><img src="./figures/dataout.png" alt="" /></p>
+<h2 id="step-10-gathering-the-data"><a class="header" href="#step-10-gathering-the-data">Step 10: Gathering the Data</a></h2>
+<p>We need to let the data run for some time to build a large enough data set for any predictive modelling. We can estimate the number lines generated over a given period, as we know that there is a delay of ~500ms. So roughly 2 every second, calculate how many data points you can have for:</p>
+<ul>
+<li>1 min</li>
+<li>15 mins</li>
+<li>30 mins</li>
+<li>60 mins</li>
+<li>120 mins</li>
+<li>240 mins</li>
+</ul>
+<p>from each of these we can calculate the file size in BiBytes for the CSV for each</p>
+<details id="admonition-full-code-here" class="admonition admonish-code" role="note" aria-labelledby="admonition-full-code-here-title">
+<summary class="admonition-title">
+<div id="admonition-full-code-here-title">
+<p>Full Code Here</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-full-code-here"></a>
+</summary>
+<div>
+<pre><code class="language-py"># FILE: predicitiveMaintenance.py
+# AUTHOR: Seb Blair (CompEng0001)
+# Version: 1.0.0
+# NOTES: script requests the data over HTTP and then writes the data to a specified location. 
+
+import requests
+import csv
+import os
+import sys
+from datetime import datetime
+import time
+
+# Run forever, or until the program is killed
+while True:
+    try:
+        # Perform a GET request from the ESP8266
+        r = requests.get('http://192.168.4.1/sbc')
+
+        # Decode the response and split by the delimiter ','
+        data = r.content.decode("ascii").split(',')
+
+        print(data)
+
+        # Prepend the timestamp with microsecond precision
+        timestamp = datetime.now().isoformat(timespec='microseconds')
+        data.insert(0, timestamp)
+
+        # Check message is the correct length (timestamp + data)
+        if len(data) == 11:
+            # Check if the file exists, if not, create it or fail and close the program
+            if not os.path.exists(data_log_csv):
+                with open(data_log_csv, mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    
+                    # Set first row headers
+                    writer.writerow(['TimeStamp','TMP36_Temp', 'DHT11_Ambient_Temp','DHT11_Humidity','Motor_Temperature','Motor_Speed_(RPM)','Motor_State','Accel_x-axis','Accel_y-axis','Accel_z-axis', 'RMS_Vibration'])
+
+            # Append CSV with the data
+            with open(data_log_csv, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(data)
+
+        # Add delay
+        time.sleep(delay)
+
+    # Any exceptions are caught and returned to the CLI
+    except Exception as e:
+        print(f"Error: {e}")
+        print("Unable to create or write to the CSV file. Program will now exit")
+        sys.exit(1)
+
+</code></pre>
+</div>
+</details>
+                    </main>
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Debian_Rock/IoT_Network.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Debian_Rock/WireShark.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Debian_Rock/IoT_Network.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Debian_Rock/WireShark.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
